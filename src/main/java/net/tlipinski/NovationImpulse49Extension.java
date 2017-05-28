@@ -5,6 +5,10 @@ import com.bitwig.extension.controller.ControllerExtension;
 import com.bitwig.extension.controller.api.ControllerHost;
 import com.bitwig.extension.controller.api.NoteInput;
 import com.bitwig.extension.controller.api.Transport;
+import net.tlipinski.commands.*;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class NovationImpulse49Extension extends ControllerExtension {
     protected NovationImpulse49Extension(final NovationImpulse49ExtensionDefinition definition, final ControllerHost host) {
@@ -22,8 +26,19 @@ public class NovationImpulse49Extension extends ControllerExtension {
 
         Tracks tracks = new Tracks(host, sysexSend);
 
-        host.getMidiInPort(0).setMidiCallback(new MidiCallback(host, tracks, midiSend, sysexSend));
-        host.getMidiInPort(1).setMidiCallback(new MidiCallback(host, tracks, midiSend, sysexSend));
+        List<MidiCommand> midiCommands = Arrays.asList(
+                new FaderCommand(tracks, sysexSend),
+                new ButtonsModeCommand(tracks, sysexSend),
+                new MuteSoloCommand(tracks, midiSend, sysexSend),
+                new RotaryCommand(tracks, sysexSend),
+                new TrackBankUpCommand(tracks),
+                new TrackBankDownCommand(tracks),
+                new RotaryBankUpCommand(tracks),
+                new RotaryBankDownCommand(tracks)
+        );
+
+        host.getMidiInPort(0).setMidiCallback(new MidiCallback(host, midiCommands));
+        host.getMidiInPort(1).setMidiCallback(new MidiCallback(host, midiCommands));
 
         host.getMidiInPort(0).setSysexCallback(new SysexCallback());
         host.getMidiInPort(1).setSysexCallback(new SysexCallback());
