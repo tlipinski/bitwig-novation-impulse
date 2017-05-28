@@ -1,6 +1,5 @@
 package net.tlipinski;
 
-import com.bitwig.extension.callback.NoArgsCallback;
 import com.bitwig.extension.callback.ObjectValueChangedCallback;
 import com.bitwig.extension.controller.api.*;
 
@@ -19,7 +18,6 @@ public class Tracks {
     private final CursorTrack cursorTrack;
     private ButtonsMode buttonsMode = ButtonsMode.MUTE;
     private ObjectValueChangedCallback<ButtonsMode> buttonsModeObserver;
-    private NoArgsCallback channelCountChangedObserver;
 
     public Tracks(ControllerHost host, SysexSend sysexSend) {
         this.host = host;
@@ -33,10 +31,6 @@ public class Tracks {
 
         PinnableCursorDevice cursorDevice = cursorTrack.createCursorDevice();
         this.cursorRemoteControlsPage = cursorDevice.createCursorRemoteControlsPage(8);
-
-        this.trackBank.channelCount().addValueObserver((int count) -> {
-            channelCountChangedObserver.call();
-        });
 
         masterTrack.name().markInterested();
         for (int i = 0; i < trackBank.getSizeOfBank(); i++) {
@@ -91,10 +85,6 @@ public class Tracks {
 
     public void addButtonsModeObserver(ObjectValueChangedCallback<ButtonsMode> callback) {
         this.buttonsModeObserver = callback;
-    }
-
-    public void setChannelCountObserver(NoArgsCallback callback) {
-        this.channelCountChangedObserver = callback;
     }
 
     public void changeButtonsMode(ButtonsMode buttonsMode) {

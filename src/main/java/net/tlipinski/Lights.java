@@ -37,24 +37,29 @@ public class Lights {
     }
 
     private void handleMute(int idx, boolean mute) {
-        if (tracks.isNotEmpty(idx)) {
-            midiSend.light(idx, !mute);
-        } else {
-            midiSend.light(idx, false);
+        if (tracks.getButtonsMode() == ButtonsMode.MUTE) {
+            if (tracks.isNotEmpty(idx)) {
+                midiSend.light(idx, !mute);
+            } else {
+                midiSend.light(idx, false);
+            }
         }
     }
 
     private void handleSolo(int idx, boolean solo) {
-        if (tracks.isNotEmpty(idx)) {
-            midiSend.light(idx, solo);
-        } else {
-            midiSend.light(idx, false);
+        if (tracks.getButtonsMode() == ButtonsMode.SOLO) {
+            if (tracks.isNotEmpty(idx)) {
+                midiSend.light(idx, solo);
+            } else {
+                midiSend.light(idx, false);
+            }
         }
     }
 
     private void initButtonModeObserver() {
         tracks.addButtonsModeObserver(this::refreshAllLights);
-        tracks.setChannelCountObserver(() -> {
+
+        tracks.getTrackBank().channelCount().addValueObserver((int count) -> {
             refreshAllLights(tracks.getButtonsMode());
         });
     }
