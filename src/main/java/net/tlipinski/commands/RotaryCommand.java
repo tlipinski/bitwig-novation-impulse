@@ -22,7 +22,7 @@ public class RotaryCommand implements MidiCommand {
 
     @Override
     public boolean triggersFor(int statusByte, int data1, int data2) {
-        return statusByte == 0xB1 && (0 <= data1 && data1 <= 8);
+        return statusByte == 0xB1 && (0 <= data1 && data1 <= 7);
     }
 
     @Override
