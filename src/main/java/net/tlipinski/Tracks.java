@@ -33,26 +33,9 @@ public class Tracks {
 
         PinnableCursorDevice cursorDevice = cursorTrack.createCursorDevice();
         this.cursorRemoteControlsPage = cursorDevice.createCursorRemoteControlsPage(8);
-        this.cursorRemoteControlsPage.pageNames().markInterested();
-
-        for (int i = 0; i < 8; i++) {
-            this.cursorRemoteControlsPage.getParameter(i).name().markInterested();
-            this.cursorRemoteControlsPage.getParameter(i).markInterested();
-        }
-
-        cursorRemoteControlsPage.selectedPageIndex().addValueObserver((int page) -> {
-            // selectedPageIndex().get() was showing stale values
-            String pageName = this.cursorRemoteControlsPage.pageNames().get(page);
-            sysexSend.displayText(pageName);
-        }, 0);
 
         this.trackBank.channelCount().addValueObserver((int count) -> {
             channelCountChangedObserver.call();
-        });
-
-        trackBank.scrollPosition().addValueObserver((int pos) -> {
-            // track.scrollPosition().get() was showing stale values
-            this.sysexSend.displayText("[" + (pos + 1) + "-" + (pos + 8) + "]");
         });
 
         masterTrack.name().markInterested();

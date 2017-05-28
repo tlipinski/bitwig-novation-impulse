@@ -31,10 +31,10 @@ public class NovationImpulse49Extension extends ControllerExtension {
                 new ButtonsModeCommand(tracks, sysexSend),
                 new MuteSoloCommand(tracks, midiSend, sysexSend),
                 new RotaryCommand(tracks, sysexSend),
-                new TrackBankUpCommand(tracks),
-                new TrackBankDownCommand(tracks),
-                new RotaryBankUpCommand(tracks),
-                new RotaryBankDownCommand(tracks)
+                new TrackBankUpCommand(tracks, sysexSend),
+                new TrackBankDownCommand(tracks, sysexSend),
+                new RotaryBankUpCommand(tracks, sysexSend),
+                new RotaryBankDownCommand(tracks, sysexSend)
         );
 
         host.getMidiInPort(0).setMidiCallback(new MidiCallback(host, midiCommands));
