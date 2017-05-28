@@ -2,6 +2,7 @@ package net.tlipinski;
 
 import com.bitwig.extension.callback.ShortMidiDataReceivedCallback;
 import com.bitwig.extension.controller.api.ControllerHost;
+import com.bitwig.extension.controller.api.RemoteControl;
 import com.bitwig.extension.controller.api.Track;
 
 public class MidiCallback implements ShortMidiDataReceivedCallback {
@@ -14,9 +15,9 @@ public class MidiCallback implements ShortMidiDataReceivedCallback {
 
     @Override
     public void midiReceived(int statusByte, int data1, int data2) {
-        host.println("-- midi -- " + String.format("%2X", statusByte) + ":" + data1 + ":" + data2);
+//        host.println("-- midi -- " + String.format("%2X", statusByte) + ":" + data1 + ":" + data2);
 
-        if (statusByte == 176) {
+        if (statusByte == 0xB0) {
             if (0 <= data1 && data1 <= 8) {
                 handleFader(data1, data2);
             } else if (9 <= data1 && data1 <= 17) {
@@ -29,6 +30,21 @@ public class MidiCallback implements ShortMidiDataReceivedCallback {
                 handleTrackBankPageDown(data1);
             }
         }
+        if (statusByte == 0xB1) {
+            if (0 <= data1 && data1 <= 8) {
+                handleRotary(data1, data2);
+            }
+        }
+    }
+
+    private void handleRotary(int data1, int data2) {
+        int rotaryIndex = data1;
+        RemoteControl parameter = tracks.getCursorRemoteControlsPage().getParameter(rotaryIndex);
+
+        double mod = (data2 - 64) * 0.03;
+        parameter.inc(mod);
+
+        sysexSend.displayText(parameter.name().get());
     }
 
     private void handleTrackBankPageUp(int data1) {
@@ -58,11 +74,8 @@ public class MidiCallback implements ShortMidiDataReceivedCallback {
                 if (t != null) {
                     t.getMute().toggle();
                     boolean mute = t.getMute().get();
-                    if (mute) {
-                        midiSend.lightOff(buttonIndex);
-                    } else {
-                        midiSend.lightOn(buttonIndex);
-                    }
+                    midiSend.light(buttonIndex, !mute);
+
                     sysexSend.displayText(t.name().get());
                 } else {
                     sysexSend.displayText("<empty>");
@@ -75,11 +88,8 @@ public class MidiCallback implements ShortMidiDataReceivedCallback {
                 if (t != null) {
                     t.getSolo().toggle();
                     boolean solo = t.getSolo().get();
-                    if (solo) {
-                        midiSend.lightOn(buttonIndex);
-                    } else {
-                        midiSend.lightOff(buttonIndex);
-                    }
+                    midiSend.light(buttonIndex, solo);
+
                     sysexSend.displayText(t.name().get());
                 } else {
                     sysexSend.displayText("<empty>");

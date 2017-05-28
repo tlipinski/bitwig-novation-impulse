@@ -2,10 +2,7 @@ package net.tlipinski;
 
 import com.bitwig.extension.callback.NoArgsCallback;
 import com.bitwig.extension.callback.ObjectValueChangedCallback;
-import com.bitwig.extension.controller.api.ControllerHost;
-import com.bitwig.extension.controller.api.MasterTrack;
-import com.bitwig.extension.controller.api.Track;
-import com.bitwig.extension.controller.api.TrackBank;
+import com.bitwig.extension.controller.api.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +12,11 @@ public class Tracks {
     private final TrackBank trackBank;
     private final MasterTrack masterTrack;
     private final SysexSend sysexSend;
+    private final PinnableCursorDevice cursorDevice;
+
+    private final CursorRemoteControlsPage cursorRemoteControlsPage;
+
+    private final CursorTrack cursorTrack;
     private ButtonsMode buttonsMode = ButtonsMode.MUTE;
     private ObjectValueChangedCallback<ButtonsMode> buttonsModeObserver;
     private NoArgsCallback channelCountChangedObserver;
@@ -25,13 +27,26 @@ public class Tracks {
         this.masterTrack = host.createMasterTrack(8);
         this.sysexSend = sysexSend;
 
+        this.cursorTrack = host.createCursorTrack(2, 0);
+
+        this.cursorDevice = cursorTrack.createCursorDevice();
+
+        PinnableCursorDevice cursorDevice = cursorTrack.createCursorDevice();
+        this.cursorRemoteControlsPage = cursorDevice.createCursorRemoteControlsPage(8);
+        this.cursorRemoteControlsPage.pageNames().markInterested();
+
+        for (int i = 0; i < 8; i++) {
+            this.cursorRemoteControlsPage.getParameter(i).name().markInterested();
+            this.cursorRemoteControlsPage.getParameter(i).markInterested();
+        }
+
         this.trackBank.channelCount().addValueObserver((int count) -> {
             channelCountChangedObserver.call();
         });
 
         trackBank.scrollPosition().addValueObserver((int pos) -> {
             // track.scrollPosition().get() was showing stale values
-            sysexSend.displayText("[" + (pos + 1) + "-" + (pos + 8) + "]");
+            this.sysexSend.displayText("[" + (pos + 1) + "-" + (pos + 8) + "]");
         });
 
         masterTrack.name().markInterested();
@@ -108,4 +123,9 @@ public class Tracks {
             host.println("" + i + ": " + channel.name().get());
         }
     }
+
+    public CursorRemoteControlsPage getCursorRemoteControlsPage() {
+        return cursorRemoteControlsPage;
+    }
+
 }
