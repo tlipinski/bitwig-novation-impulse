@@ -8,11 +8,19 @@ public class MidiSend {
         this.host = host;
     }
 
-    public void lightOn(int index) {
+    public void light(int index, boolean on) {
+        if (on) {
+            lightOn(index);
+        } else {
+            lightOff(index);
+        }
+    }
+
+    private void lightOn(int index) {
         host.getMidiOutPort(0).sendMidi(176, 9 + index, 1);
     }
 
-    public void lightOff(int index) {
+    private void lightOff(int index) {
         host.getMidiOutPort(0).sendMidi(176, 9 + index, 0);
     }
 

@@ -38,25 +38,17 @@ public class Lights {
 
     private void handleMute(int idx, boolean mute) {
         if (tracks.isNotEmpty(idx)) {
-            if (mute) {
-                midiSend.lightOff(idx);
-            } else {
-                midiSend.lightOn(idx);
-            }
+            midiSend.light(idx, !mute);
         } else {
-            midiSend.lightOff(idx);
+            midiSend.light(idx, false);
         }
     }
 
     private void handleSolo(int idx, boolean solo) {
         if (tracks.isNotEmpty(idx)) {
-            if (solo) {
-                midiSend.lightOn(idx);
-            } else {
-                midiSend.lightOff(idx);
-            }
+            midiSend.light(idx, solo);
         } else {
-            midiSend.lightOff(idx);
+            midiSend.light(idx, false);
         }
     }
 
