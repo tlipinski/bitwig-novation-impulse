@@ -40,6 +40,12 @@ public class Tracks {
             this.cursorRemoteControlsPage.getParameter(i).markInterested();
         }
 
+        cursorRemoteControlsPage.selectedPageIndex().addValueObserver((int page) -> {
+            // selectedPageIndex().get() was showing stale values
+            String pageName = this.cursorRemoteControlsPage.pageNames().get(page);
+            sysexSend.displayText(pageName);
+        }, 0);
+
         this.trackBank.channelCount().addValueObserver((int count) -> {
             channelCountChangedObserver.call();
         });

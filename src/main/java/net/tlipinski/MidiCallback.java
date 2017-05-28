@@ -15,7 +15,7 @@ public class MidiCallback implements ShortMidiDataReceivedCallback {
 
     @Override
     public void midiReceived(int statusByte, int data1, int data2) {
-//        host.println("-- midi -- " + String.format("%2X", statusByte) + ":" + data1 + ":" + data2);
+        host.println("-- midi -- " + String.format("%2X", statusByte) + ":" + data1 + ":" + data2);
 
         if (statusByte == 0xB0) {
             if (0 <= data1 && data1 <= 8) {
@@ -33,8 +33,20 @@ public class MidiCallback implements ShortMidiDataReceivedCallback {
         if (statusByte == 0xB1) {
             if (0 <= data1 && data1 <= 8) {
                 handleRotary(data1, data2);
+            } else if (data1 == 11) {
+                rotaryBankUp();
+            } else if (data1 == 12) {
+                rotaryBankDown();
             }
         }
+    }
+
+    private void rotaryBankUp() {
+        tracks.getCursorRemoteControlsPage().selectPreviousPage(false);
+    }
+
+    private void rotaryBankDown() {
+        tracks.getCursorRemoteControlsPage().selectNextPage(false);
     }
 
     private void handleRotary(int data1, int data2) {
