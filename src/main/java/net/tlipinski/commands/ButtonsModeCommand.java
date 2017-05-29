@@ -1,14 +1,12 @@
 package net.tlipinski.commands;
 
-import net.tlipinski.ButtonsMode;
-import net.tlipinski.MidiCommand;
-import net.tlipinski.SysexSend;
-import net.tlipinski.Tracks;
+import net.tlipinski.*;
 
 public class ButtonsModeCommand implements MidiCommand {
 
-    public ButtonsModeCommand(Tracks tracks, SysexSend sysexSend) {
+    public ButtonsModeCommand(Tracks tracks, MidiSend midiSend, SysexSend sysexSend) {
         this.tracks = tracks;
+        this.midiSend = midiSend;
         this.sysexSend = sysexSend;
     }
 
@@ -21,14 +19,18 @@ public class ButtonsModeCommand implements MidiCommand {
     public void handle(int data1, int data2) {
         if (data2 == 1) {
             tracks.changeButtonsMode(ButtonsMode.MUTE);
+            new RefreshAllLightsCallback(tracks, midiSend).valueChanged(ButtonsMode.MUTE);
             sysexSend.displayText("Mutes");
-        } else {
+        }
+        if (data2 == 0){
             tracks.changeButtonsMode(ButtonsMode.SOLO);
+            new RefreshAllLightsCallback(tracks, midiSend).valueChanged(ButtonsMode.SOLO);
             sysexSend.displayText("Solos");
         }
     }
 
     private Tracks tracks;
+    private final MidiSend midiSend;
     private SysexSend sysexSend;
 
 }

@@ -1,6 +1,5 @@
 package net.tlipinski;
 
-import com.bitwig.extension.callback.ObjectValueChangedCallback;
 import com.bitwig.extension.controller.api.*;
 
 import java.util.ArrayList;
@@ -17,7 +16,6 @@ public class Tracks {
 
     private final CursorTrack cursorTrack;
     private ButtonsMode buttonsMode = ButtonsMode.MUTE;
-    private ObjectValueChangedCallback<ButtonsMode> buttonsModeObserver;
 
     public Tracks(ControllerHost host, SysexSend sysexSend) {
         this.host = host;
@@ -83,13 +81,8 @@ public class Tracks {
         return result;
     }
 
-    public void addButtonsModeObserver(ObjectValueChangedCallback<ButtonsMode> callback) {
-        this.buttonsModeObserver = callback;
-    }
-
     public void changeButtonsMode(ButtonsMode buttonsMode) {
         this.buttonsMode = buttonsMode;
-        buttonsModeObserver.valueChanged(buttonsMode);
     }
 
     public ButtonsMode getButtonsMode() {

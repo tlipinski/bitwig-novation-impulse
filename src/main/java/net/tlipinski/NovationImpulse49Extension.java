@@ -28,7 +28,7 @@ public class NovationImpulse49Extension extends ControllerExtension {
 
         List<MidiCommand> midiCommands = Arrays.asList(
                 new FaderCommand(tracks, sysexSend),
-                new ButtonsModeCommand(tracks, sysexSend),
+                new ButtonsModeCommand(tracks, midiSend, sysexSend),
                 new MuteSoloCommand(tracks, midiSend, sysexSend),
                 new RotaryCommand(tracks, sysexSend),
                 new TrackBankUpCommand(tracks, sysexSend),
@@ -36,6 +36,10 @@ public class NovationImpulse49Extension extends ControllerExtension {
                 new RotaryBankUpCommand(tracks, sysexSend),
                 new RotaryBankDownCommand(tracks, sysexSend)
         );
+
+        new MuteObserver(tracks, midiSend);
+        new SoloObserver(tracks, midiSend);
+        new ChannelCountObserver(tracks, midiSend);
 
         host.getMidiInPort(0).setMidiCallback(new MidiCallback(host, midiCommands));
         host.getMidiInPort(1).setMidiCallback(new MidiCallback(host, midiCommands));
@@ -47,8 +51,6 @@ public class NovationImpulse49Extension extends ControllerExtension {
         NoteInput noteInputs1 = createNoteInputs(host, 1);
 
         host.showPopupNotification("Novation Impulse 49 Initialized");
-
-        Lights trackBankControl = new Lights(host, tracks, midiSend);
 
         sysexSend.initController();
     }
