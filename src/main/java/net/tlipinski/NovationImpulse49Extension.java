@@ -41,8 +41,8 @@ public class NovationImpulse49Extension extends ControllerExtension {
         host.getMidiInPort(0).setMidiCallback(new MidiCallback(host, midiCommands));
         host.getMidiInPort(1).setMidiCallback(new MidiCallback(host, midiCommands));
 
-        host.getMidiInPort(0).setSysexCallback(new SysexCallback());
-        host.getMidiInPort(1).setSysexCallback(new SysexCallback());
+        host.getMidiInPort(0).setSysexCallback(new SysexCallback(host));
+        host.getMidiInPort(1).setSysexCallback(new SysexCallback(host));
 
         NoteInput noteInputs0 = createNoteInputs(host, 0);
         NoteInput noteInputs1 = createNoteInputs(host, 1);
