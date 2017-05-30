@@ -10,12 +10,13 @@ public class Tracks {
     private final TrackBank trackBank;
     private final MasterTrack masterTrack;
     private final SysexSend sysexSend;
-    private final PinnableCursorDevice cursorDevice;
+    public final PinnableCursorDevice cursorDevice;
 
-    private final CursorRemoteControlsPage cursorRemoteControlsPage;
+    public final CursorRemoteControlsPage cursorRemoteControlsPage;
 
     private final CursorTrack cursorTrack;
     private ButtonsMode buttonsMode = ButtonsMode.MUTE;
+    private RotaryMode rotaryMode = RotaryMode.PLUGIN;
 
     public Tracks(ControllerHost host, SysexSend sysexSend) {
         this.host = host;
@@ -100,4 +101,11 @@ public class Tracks {
         return cursorRemoteControlsPage;
     }
 
+    public ControllerHost getHost() {
+        return host;
+    }
+
+    public void changeRotaryMode(RotaryMode mode) {
+        this.rotaryMode = mode;
+    }
 }

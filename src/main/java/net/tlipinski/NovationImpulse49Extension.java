@@ -31,7 +31,9 @@ public class NovationImpulse49Extension extends ControllerExtension {
                 new TrackBankDownCommand(tracks, sysexSend),
                 new RotaryBankUpCommand(tracks, sysexSend),
                 new RotaryBankDownCommand(tracks, sysexSend),
-                new TransportCommand(host.createTransport())
+                new TransportCommand(host.createTransport()),
+                new RotaryPluginModeCommand(tracks, midiSend, sysexSend),
+                new RotaryMixerModeCommand(tracks, midiSend, sysexSend)
         );
 
         new MuteObserver(tracks, midiSend);
