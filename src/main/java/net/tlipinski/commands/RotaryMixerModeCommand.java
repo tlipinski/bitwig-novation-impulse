@@ -8,6 +8,8 @@ public class RotaryMixerModeCommand implements MidiCommand {
         this.tracks = tracks;
         this.midiSend = midiSend;
         this.sysexSend = sysexSend;
+
+        midiSend.resetRotaryMode();
     }
 
     @Override

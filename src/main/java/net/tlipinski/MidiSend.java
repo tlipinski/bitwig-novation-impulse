@@ -16,12 +16,16 @@ public class MidiSend {
         }
     }
 
+    public void resetRotaryMode() {
+        host.getMidiOutPort(0).sendMidi(0xB1, 10, 1);
+    }
+
     private void lightOn(int index) {
-        host.getMidiOutPort(0).sendMidi(176, 9 + index, 1);
+        host.getMidiOutPort(0).sendMidi(0xB0, 9 + index, 1);
     }
 
     private void lightOff(int index) {
-        host.getMidiOutPort(0).sendMidi(176, 9 + index, 0);
+        host.getMidiOutPort(0).sendMidi(0xB0, 9 + index, 0);
     }
 
     private final ControllerHost host;
