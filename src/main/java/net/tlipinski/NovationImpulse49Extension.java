@@ -1,10 +1,8 @@
 package net.tlipinski;
 
-import com.bitwig.extension.api.util.midi.ShortMidiMessage;
 import com.bitwig.extension.controller.ControllerExtension;
 import com.bitwig.extension.controller.api.ControllerHost;
 import com.bitwig.extension.controller.api.NoteInput;
-import com.bitwig.extension.controller.api.Transport;
 import net.tlipinski.commands.*;
 
 import java.util.Arrays;
@@ -19,8 +17,6 @@ public class NovationImpulse49Extension extends ControllerExtension {
     public void init() {
         final ControllerHost host = getHost();
 
-        mTransport = host.createTransport();
-
         MidiSend midiSend = new MidiSend(host);
         SysexSend sysexSend = new SysexSend(host);
 
@@ -34,7 +30,8 @@ public class NovationImpulse49Extension extends ControllerExtension {
                 new TrackBankUpCommand(tracks, sysexSend),
                 new TrackBankDownCommand(tracks, sysexSend),
                 new RotaryBankUpCommand(tracks, sysexSend),
-                new RotaryBankDownCommand(tracks, sysexSend)
+                new RotaryBankDownCommand(tracks, sysexSend),
+                new TransportCommand(host.createTransport())
         );
 
         new MuteObserver(tracks, midiSend);
@@ -74,34 +71,4 @@ public class NovationImpulse49Extension extends ControllerExtension {
         return host.getMidiInPort(index).createNoteInput("Impulse Keyboard", notePress, noteRelease, aftertouch, pitchWheel, modWheel);
     }
 
-    private void onSysex0(final String data) {
-        getHost().println(data);
-        // MMC Transport Controls:
-        switch (data) {
-            case "f07f7f0605f7":
-                mTransport.rewind();
-                break;
-            case "f07f7f0604f7":
-                mTransport.fastForward();
-                break;
-            case "f07f7f0601f7":
-                mTransport.stop();
-                break;
-            case "f07f7f0602f7":
-                mTransport.play();
-                break;
-            case "f07f7f0606f7":
-                mTransport.record();
-                break;
-        }
-    }
-
-    private void onMidi1(ShortMidiMessage msg) {
-    }
-
-    private void onSysex1(final String data) {
-
-    }
-
-    private Transport mTransport;
 }
