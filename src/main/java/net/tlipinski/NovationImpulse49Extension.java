@@ -20,6 +20,8 @@ public class NovationImpulse49Extension extends ControllerExtension {
         MidiSend midiSend = new MidiSend(host);
         SysexSend sysexSend = new SysexSend(host);
 
+        Preferences prefs = new Preferences(host);
+
         Tracks tracks = new Tracks(host, sysexSend);
 
         List<MidiCommand> midiCommands = Arrays.asList(
@@ -40,11 +42,11 @@ public class NovationImpulse49Extension extends ControllerExtension {
         new SoloObserver(tracks, midiSend);
         new ChannelCountObserver(tracks, midiSend);
 
-        host.getMidiInPort(0).setMidiCallback(new MidiCallback(host, midiCommands));
-        host.getMidiInPort(1).setMidiCallback(new MidiCallback(host, midiCommands));
+        host.getMidiInPort(0).setMidiCallback(new MidiCallback(host, prefs, midiCommands));
+        host.getMidiInPort(1).setMidiCallback(new MidiCallback(host, prefs, midiCommands));
 
-        host.getMidiInPort(0).setSysexCallback(new SysexCallback(host));
-        host.getMidiInPort(1).setSysexCallback(new SysexCallback(host));
+        host.getMidiInPort(0).setSysexCallback(new SysexCallback(host, prefs));
+        host.getMidiInPort(1).setSysexCallback(new SysexCallback(host, prefs));
 
         NoteInput noteInputs0 = createNoteInputs(host, 0);
         NoteInput noteInputs1 = createNoteInputs(host, 1);
