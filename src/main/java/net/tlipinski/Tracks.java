@@ -108,4 +108,8 @@ public class Tracks {
     public void changeRotaryMode(RotaryMode mode) {
         this.rotaryMode = mode;
     }
+
+    public RotaryMode getRotaryMode() {
+        return rotaryMode;
+    }
 }
