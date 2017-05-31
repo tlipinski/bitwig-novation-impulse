@@ -6,15 +6,15 @@ import com.bitwig.extension.controller.api.Track;
 import net.tlipinski.MidiCommand;
 import net.tlipinski.RotaryMode;
 import net.tlipinski.SysexSend;
-import net.tlipinski.Tracks;
+import net.tlipinski.Controller;
 
 public class RotaryCommand implements MidiCommand {
 
-    public RotaryCommand(Tracks tracks, SysexSend sysexSend) {
-        this.tracks = tracks;
+    public RotaryCommand(Controller controller, SysexSend sysexSend) {
+        this.controller = controller;
         this.sysexSend = sysexSend;
 
-        CursorRemoteControlsPage cursorRemoteControlsPage = tracks.getCursorRemoteControlsPage();
+        CursorRemoteControlsPage cursorRemoteControlsPage = controller.getTracks().getCursorRemoteControlsPage();
 
         for (int i = 0; i < 8; i++) {
             cursorRemoteControlsPage.getParameter(i).name().markInterested();
@@ -22,7 +22,7 @@ public class RotaryCommand implements MidiCommand {
         }
 
         for (int i = 0; i < 8; i++) {
-            tracks.getTrackBank().getChannel(i).getPan().markInterested();
+            controller.getTracks().getTrackBank().getChannel(i).getPan().markInterested();
         }
     }
 
@@ -35,8 +35,8 @@ public class RotaryCommand implements MidiCommand {
     public void handle(int data1, int data2) {
         int rotaryIndex = data1;
 
-        if (tracks.getRotaryMode() == RotaryMode.PLUGIN) {
-            RemoteControl parameter = tracks.getCursorRemoteControlsPage().getParameter(rotaryIndex);
+        if (controller.getRotaryMode() == RotaryMode.PLUGIN) {
+            RemoteControl parameter = controller.getTracks().getCursorRemoteControlsPage().getParameter(rotaryIndex);
 
             double mod = (data2 - 64) * 0.03;
             parameter.inc(mod);
@@ -44,8 +44,8 @@ public class RotaryCommand implements MidiCommand {
             sysexSend.displayText(parameter.name().get());
         }
 
-        if (tracks.getRotaryMode() == RotaryMode.MIXER) {
-            Track track = tracks.get(rotaryIndex);
+        if (controller.getRotaryMode() == RotaryMode.MIXER) {
+            Track track = controller.getTracks().get(rotaryIndex);
             double mod = (data2 - 64) * 0.03;
             track.getPan().inc(mod);
 
@@ -53,7 +53,7 @@ public class RotaryCommand implements MidiCommand {
         }
     }
 
-    private final Tracks tracks;
+    private final Controller controller;
     private final SysexSend sysexSend;
 
 }

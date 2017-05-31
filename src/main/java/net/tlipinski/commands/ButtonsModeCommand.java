@@ -5,8 +5,8 @@ import net.tlipinski.observers.callbacks.RefreshAllLightsCallback;
 
 public class ButtonsModeCommand implements MidiCommand {
 
-    public ButtonsModeCommand(Tracks tracks, MidiSend midiSend, SysexSend sysexSend) {
-        this.tracks = tracks;
+    public ButtonsModeCommand(Controller controller, MidiSend midiSend, SysexSend sysexSend) {
+        this.controller = controller;
         this.midiSend = midiSend;
         this.sysexSend = sysexSend;
     }
@@ -19,18 +19,18 @@ public class ButtonsModeCommand implements MidiCommand {
     @Override
     public void handle(int data1, int data2) {
         if (data2 == 1) {
-            tracks.changeButtonsMode(ButtonsMode.MUTE);
-            new RefreshAllLightsCallback(tracks, midiSend).valueChanged(ButtonsMode.MUTE);
+            controller.changeButtonsMode(ButtonsMode.MUTE);
+            new RefreshAllLightsCallback(controller, midiSend).valueChanged(ButtonsMode.MUTE);
             sysexSend.displayText("Mutes");
         }
         if (data2 == 0){
-            tracks.changeButtonsMode(ButtonsMode.SOLO);
-            new RefreshAllLightsCallback(tracks, midiSend).valueChanged(ButtonsMode.SOLO);
+            controller.changeButtonsMode(ButtonsMode.SOLO);
+            new RefreshAllLightsCallback(controller, midiSend).valueChanged(ButtonsMode.SOLO);
             sysexSend.displayText("Solos");
         }
     }
 
-    private Tracks tracks;
+    private Controller controller;
     private final MidiSend midiSend;
     private SysexSend sysexSend;
 

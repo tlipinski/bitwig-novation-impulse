@@ -1,14 +1,12 @@
 package net.tlipinski.commands;
 
-import com.bitwig.extension.controller.api.CursorRemoteControlsPage;
 import net.tlipinski.MidiCommand;
-import net.tlipinski.SysexSend;
-import net.tlipinski.Tracks;
+import net.tlipinski.Controller;
 
 public class RotaryBankUpCommand implements MidiCommand {
 
-    public RotaryBankUpCommand(Tracks tracks) {
-        this.tracks = tracks;
+    public RotaryBankUpCommand(Controller controller) {
+        this.controller = controller;
     }
 
     @Override
@@ -18,9 +16,9 @@ public class RotaryBankUpCommand implements MidiCommand {
 
     @Override
     public void handle(int data1, int data2) {
-        tracks.getCursorRemoteControlsPage().selectPreviousPage(false);
+        controller.getTracks().getCursorRemoteControlsPage().selectPreviousPage(false);
     }
 
-    private final Tracks tracks;
+    private final Controller controller;
 
 }

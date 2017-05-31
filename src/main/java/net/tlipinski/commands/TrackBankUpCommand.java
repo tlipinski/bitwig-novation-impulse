@@ -2,14 +2,14 @@ package net.tlipinski.commands;
 
 import net.tlipinski.MidiCommand;
 import net.tlipinski.SysexSend;
-import net.tlipinski.Tracks;
+import net.tlipinski.Controller;
 
 public class TrackBankUpCommand implements MidiCommand {
 
-    public TrackBankUpCommand(Tracks tracks, SysexSend sysexSend) {
-        this.tracks = tracks;
+    public TrackBankUpCommand(Controller controller, SysexSend sysexSend) {
+        this.controller = controller;
 
-        tracks.getTrackBank().scrollPosition().addValueObserver((int pos) -> {
+        controller.getTracks().getTrackBank().scrollPosition().addValueObserver((int pos) -> {
             // track.scrollPosition().get() was showing stale values
             sysexSend.displayText("[" + (pos + 1) + "-" + (pos + 8) + "]");
         });
@@ -22,9 +22,9 @@ public class TrackBankUpCommand implements MidiCommand {
 
     @Override
     public void handle(int data1, int data2) {
-        tracks.getTrackBank().scrollChannelsPageUp();
+        controller.getTracks().getTrackBank().scrollChannelsPageUp();
     }
 
-    private final Tracks tracks;
+    private final Controller controller;
 
 }

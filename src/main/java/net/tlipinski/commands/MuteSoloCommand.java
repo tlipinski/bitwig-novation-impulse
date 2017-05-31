@@ -5,8 +5,8 @@ import net.tlipinski.*;
 
 public class MuteSoloCommand implements MidiCommand {
 
-    public MuteSoloCommand(Tracks tracks, MidiSend midiSend, SysexSend sysexSend) {
-        this.tracks = tracks;
+    public MuteSoloCommand(Controller controller, MidiSend midiSend, SysexSend sysexSend) {
+        this.controller = controller;
         this.midiSend = midiSend;
         this.sysexSend = sysexSend;
     }
@@ -20,9 +20,9 @@ public class MuteSoloCommand implements MidiCommand {
     public void handle(int data1, int data2) {
         int buttonIndex = data1 - 9;
 
-        if (tracks.getButtonsMode() == ButtonsMode.MUTE) {
+        if (controller.getButtonsMode() == ButtonsMode.MUTE) {
             if (data2 == 1) {
-                Track t = tracks.get(buttonIndex);
+                Track t = controller.getTracks().get(buttonIndex);
                 if (t != null) {
                     t.getMute().toggle();
                     boolean mute = t.getMute().get();
@@ -34,9 +34,9 @@ public class MuteSoloCommand implements MidiCommand {
                 }
             }
         }
-        if (tracks.getButtonsMode() == ButtonsMode.SOLO) {
+        if (controller.getButtonsMode() == ButtonsMode.SOLO) {
             if (data2 == 1) {
-                Track t = tracks.get(buttonIndex);
+                Track t = controller.getTracks().get(buttonIndex);
                 if (t != null) {
                     t.getSolo().toggle();
                     boolean solo = t.getSolo().get();
@@ -50,7 +50,7 @@ public class MuteSoloCommand implements MidiCommand {
         }
     }
 
-    private final Tracks tracks;
+    private final Controller controller;
     private final MidiSend midiSend;
     private final SysexSend sysexSend;
 

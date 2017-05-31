@@ -4,22 +4,22 @@ import com.bitwig.extension.callback.ObjectValueChangedCallback;
 import com.bitwig.extension.controller.api.Track;
 import net.tlipinski.ButtonsMode;
 import net.tlipinski.MidiSend;
-import net.tlipinski.Tracks;
+import net.tlipinski.Controller;
 
 import java.util.List;
 
 public class RefreshAllLightsCallback implements ObjectValueChangedCallback<ButtonsMode> {
-    private final Tracks tracks;
+    private final Controller controller;
     private final MidiSend midiSend;
 
-    public RefreshAllLightsCallback(Tracks tracks, MidiSend midiSend) {
-        this.tracks = tracks;
+    public RefreshAllLightsCallback(Controller controller, MidiSend midiSend) {
+        this.controller = controller;
         this.midiSend = midiSend;
     }
 
     @Override
     public void valueChanged(ButtonsMode newValue) {
-        List<Track> all = tracks.getAll();
+        List<Track> all = controller.getTracks().getAll();
         for (int i = 0; i < all.size(); i++) {
             Track track = all.get(i);
 
@@ -33,8 +33,8 @@ public class RefreshAllLightsCallback implements ObjectValueChangedCallback<Butt
     }
 
     private void handleMute(int idx, boolean mute) {
-        if (tracks.getButtonsMode() == ButtonsMode.MUTE) {
-            if (tracks.isNotEmpty(idx)) {
+        if (controller.getButtonsMode() == ButtonsMode.MUTE) {
+            if (controller.getTracks().isNotEmpty(idx)) {
                 midiSend.light(idx, !mute);
             } else {
                 midiSend.light(idx, false);
@@ -43,8 +43,8 @@ public class RefreshAllLightsCallback implements ObjectValueChangedCallback<Butt
     }
 
     private void handleSolo(int idx, boolean solo) {
-        if (tracks.getButtonsMode() == ButtonsMode.SOLO) {
-            if (tracks.isNotEmpty(idx)) {
+        if (controller.getButtonsMode() == ButtonsMode.SOLO) {
+            if (controller.getTracks().isNotEmpty(idx)) {
                 midiSend.light(idx, solo);
             } else {
                 midiSend.light(idx, false);

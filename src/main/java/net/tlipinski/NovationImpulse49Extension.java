@@ -26,26 +26,28 @@ public class NovationImpulse49Extension extends ControllerExtension {
 
         Preferences prefs = new Preferences(host);
 
-        Tracks tracks = new Tracks(host, sysexSend, prefs);
+        Tracks tracks = new Tracks(host);
+
+        Controller controller = new Controller(host, tracks, sysexSend, prefs);
 
         List<MidiCommand> midiCommands = Arrays.asList(
-                new FaderCommand(tracks, sysexSend),
-                new ButtonsModeCommand(tracks, midiSend, sysexSend),
-                new MuteSoloCommand(tracks, midiSend, sysexSend),
-                new RotaryCommand(tracks, sysexSend),
-                new TrackBankUpCommand(tracks, sysexSend),
-                new TrackBankDownCommand(tracks, sysexSend),
-                new RotaryBankUpCommand(tracks),
-                new RotaryBankDownCommand(tracks),
+                new FaderCommand(controller, sysexSend),
+                new ButtonsModeCommand(controller, midiSend, sysexSend),
+                new MuteSoloCommand(controller, midiSend, sysexSend),
+                new RotaryCommand(controller, sysexSend),
+                new TrackBankUpCommand(controller, sysexSend),
+                new TrackBankDownCommand(controller, sysexSend),
+                new RotaryBankUpCommand(controller),
+                new RotaryBankDownCommand(controller),
                 new TransportCommand(host.createTransport()),
-                new RotaryPluginModeCommand(tracks, midiSend, sysexSend),
-                new RotaryMixerModeCommand(tracks, midiSend, sysexSend)
+                new RotaryPluginModeCommand(controller, midiSend, sysexSend),
+                new RotaryMixerModeCommand(controller, midiSend, sysexSend)
         );
 
-        new MuteObserver(tracks, midiSend);
-        new SoloObserver(tracks, midiSend);
-        new ChannelCountObserver(tracks, midiSend);
-        new RotaryBankIndexObserver(tracks, sysexSend);
+        new MuteObserver(controller, midiSend);
+        new SoloObserver(controller, midiSend);
+        new ChannelCountObserver(controller, midiSend);
+        new RotaryBankIndexObserver(controller, sysexSend);
 
         host.getMidiInPort(0).setMidiCallback(new MidiCallback(host, prefs, midiCommands));
         host.getMidiInPort(1).setMidiCallback(new MidiCallback(host, prefs, midiCommands));

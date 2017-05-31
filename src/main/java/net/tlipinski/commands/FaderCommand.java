@@ -3,12 +3,12 @@ package net.tlipinski.commands;
 import com.bitwig.extension.controller.api.Track;
 import net.tlipinski.MidiCommand;
 import net.tlipinski.SysexSend;
-import net.tlipinski.Tracks;
+import net.tlipinski.Controller;
 
 public class FaderCommand implements MidiCommand {
 
-    public FaderCommand(Tracks tracks, SysexSend sysexSend) {
-        this.tracks = tracks;
+    public FaderCommand(Controller controller, SysexSend sysexSend) {
+        this.controller = controller;
         this.sysexSend = sysexSend;
     }
 
@@ -19,7 +19,7 @@ public class FaderCommand implements MidiCommand {
 
     @Override
     public void handle(int data1, int data2) {
-        Track t = this.tracks.get(data1);
+        Track t = this.controller.getTracks().get(data1);
         if (t != null) {
             t.getVolume().set(data2, 128);
             this.sysexSend.displayText(t.name().get());
@@ -28,7 +28,7 @@ public class FaderCommand implements MidiCommand {
         }
     }
 
-    private Tracks tracks;
+    private Controller controller;
     private SysexSend sysexSend;
 
 }

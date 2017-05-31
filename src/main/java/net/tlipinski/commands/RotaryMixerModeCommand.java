@@ -4,8 +4,8 @@ import net.tlipinski.*;
 
 public class RotaryMixerModeCommand implements MidiCommand {
 
-    public RotaryMixerModeCommand(Tracks tracks, MidiSend midiSend, SysexSend sysexSend) {
-        this.tracks = tracks;
+    public RotaryMixerModeCommand(Controller controller, MidiSend midiSend, SysexSend sysexSend) {
+        this.controller = controller;
         this.midiSend = midiSend;
         this.sysexSend = sysexSend;
 
@@ -19,11 +19,11 @@ public class RotaryMixerModeCommand implements MidiCommand {
 
     @Override
     public void handle(int data1, int data2) {
-        tracks.changeRotaryMode(RotaryMode.MIXER);
+        controller.changeRotaryMode(RotaryMode.MIXER);
         sysexSend.displayText("Mixer");
     }
 
-    private Tracks tracks;
+    private Controller controller;
     private final MidiSend midiSend;
     private SysexSend sysexSend;
 
