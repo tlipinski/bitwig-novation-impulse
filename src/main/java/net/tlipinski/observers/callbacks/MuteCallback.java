@@ -1,6 +1,9 @@
-package net.tlipinski;
+package net.tlipinski.observers.callbacks;
 
 import com.bitwig.extension.callback.BooleanValueChangedCallback;
+import net.tlipinski.ButtonsMode;
+import net.tlipinski.MidiSend;
+import net.tlipinski.Tracks;
 
 public class MuteCallback implements BooleanValueChangedCallback {
     private final int idx;

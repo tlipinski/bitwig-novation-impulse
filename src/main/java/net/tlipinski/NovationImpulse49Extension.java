@@ -4,6 +4,10 @@ import com.bitwig.extension.controller.ControllerExtension;
 import com.bitwig.extension.controller.api.ControllerHost;
 import com.bitwig.extension.controller.api.NoteInput;
 import net.tlipinski.commands.*;
+import net.tlipinski.observers.ChannelCountObserver;
+import net.tlipinski.observers.MuteObserver;
+import net.tlipinski.observers.RotaryBankIndexObserver;
+import net.tlipinski.observers.SoloObserver;
 
 import java.util.Arrays;
 import java.util.List;

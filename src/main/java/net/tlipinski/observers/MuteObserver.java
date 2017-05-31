@@ -1,6 +1,9 @@
-package net.tlipinski;
+package net.tlipinski.observers;
 
 import com.bitwig.extension.controller.api.Track;
+import net.tlipinski.MidiSend;
+import net.tlipinski.Tracks;
+import net.tlipinski.observers.callbacks.MuteCallback;
 
 import java.util.List;
 

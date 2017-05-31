@@ -1,7 +1,10 @@
-package net.tlipinski;
+package net.tlipinski.observers.callbacks;
 
 import com.bitwig.extension.callback.ObjectValueChangedCallback;
 import com.bitwig.extension.controller.api.Track;
+import net.tlipinski.ButtonsMode;
+import net.tlipinski.MidiSend;
+import net.tlipinski.Tracks;
 
 import java.util.List;
 

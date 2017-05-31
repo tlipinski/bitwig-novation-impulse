@@ -1,6 +1,7 @@
 package net.tlipinski.commands;
 
 import net.tlipinski.*;
+import net.tlipinski.observers.callbacks.RefreshAllLightsCallback;
 
 public class ButtonsModeCommand implements MidiCommand {
 

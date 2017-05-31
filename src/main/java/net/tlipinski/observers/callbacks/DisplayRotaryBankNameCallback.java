@@ -1,7 +1,9 @@
-package net.tlipinski;
+package net.tlipinski.observers.callbacks;
 
 import com.bitwig.extension.callback.IntegerValueChangedCallback;
 import com.bitwig.extension.controller.api.CursorRemoteControlsPage;
+import net.tlipinski.SysexSend;
+import net.tlipinski.Tracks;
 
 public class DisplayRotaryBankNameCallback implements IntegerValueChangedCallback {
     private final Tracks tracks;
