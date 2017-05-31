@@ -10,6 +10,7 @@ public class Tracks {
     private final TrackBank trackBank;
     private final MasterTrack masterTrack;
     private final SysexSend sysexSend;
+    private final Preferences preferences;
     public final PinnableCursorDevice cursorDevice;
 
     public final CursorRemoteControlsPage cursorRemoteControlsPage;
@@ -18,13 +19,14 @@ public class Tracks {
     private ButtonsMode buttonsMode = ButtonsMode.MUTE;
     private RotaryMode rotaryMode = RotaryMode.PLUGIN;
 
-    public Tracks(ControllerHost host, SysexSend sysexSend) {
+    public Tracks(ControllerHost host, SysexSend sysexSend, Preferences preferences) {
         this.host = host;
         this.trackBank = host.createTrackBank(8, 2, 8);
         this.masterTrack = host.createMasterTrack(8);
         this.sysexSend = sysexSend;
 
         this.cursorTrack = host.createCursorTrack(2, 0);
+        this.preferences = preferences;
 
         this.cursorDevice = cursorTrack.createCursorDevice();
 
@@ -111,5 +113,9 @@ public class Tracks {
 
     public RotaryMode getRotaryMode() {
         return rotaryMode;
+    }
+
+    public Preferences getPreferences() {
+        return preferences;
     }
 }

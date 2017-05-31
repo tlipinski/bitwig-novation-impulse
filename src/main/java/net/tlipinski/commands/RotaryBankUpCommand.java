@@ -7,18 +7,8 @@ import net.tlipinski.Tracks;
 
 public class RotaryBankUpCommand implements MidiCommand {
 
-    public RotaryBankUpCommand(Tracks tracks, SysexSend sysexSend) {
+    public RotaryBankUpCommand(Tracks tracks) {
         this.tracks = tracks;
-
-        CursorRemoteControlsPage cursorRemoteControlsPage = tracks.getCursorRemoteControlsPage();
-
-        cursorRemoteControlsPage.pageNames().markInterested();
-        cursorRemoteControlsPage.selectedPageIndex().addValueObserver((int page) -> {
-            // selectedPageIndex().get() was showing stale values
-            String pageName = cursorRemoteControlsPage.pageNames().get(page);
-            sysexSend.displayText(pageName);
-        }, 0);
-
     }
 
     @Override

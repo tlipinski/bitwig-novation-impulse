@@ -22,7 +22,7 @@ public class NovationImpulse49Extension extends ControllerExtension {
 
         Preferences prefs = new Preferences(host);
 
-        Tracks tracks = new Tracks(host, sysexSend);
+        Tracks tracks = new Tracks(host, sysexSend, prefs);
 
         List<MidiCommand> midiCommands = Arrays.asList(
                 new FaderCommand(tracks, sysexSend),
@@ -31,8 +31,8 @@ public class NovationImpulse49Extension extends ControllerExtension {
                 new RotaryCommand(tracks, sysexSend),
                 new TrackBankUpCommand(tracks, sysexSend),
                 new TrackBankDownCommand(tracks, sysexSend),
-                new RotaryBankUpCommand(tracks, sysexSend),
-                new RotaryBankDownCommand(tracks, sysexSend),
+                new RotaryBankUpCommand(tracks),
+                new RotaryBankDownCommand(tracks),
                 new TransportCommand(host.createTransport()),
                 new RotaryPluginModeCommand(tracks, midiSend, sysexSend),
                 new RotaryMixerModeCommand(tracks, midiSend, sysexSend)
@@ -41,6 +41,7 @@ public class NovationImpulse49Extension extends ControllerExtension {
         new MuteObserver(tracks, midiSend);
         new SoloObserver(tracks, midiSend);
         new ChannelCountObserver(tracks, midiSend);
+        new RotaryBankIndexObserver(tracks, sysexSend);
 
         host.getMidiInPort(0).setMidiCallback(new MidiCallback(host, prefs, midiCommands));
         host.getMidiInPort(1).setMidiCallback(new MidiCallback(host, prefs, midiCommands));
