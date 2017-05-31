@@ -6,13 +6,8 @@ import net.tlipinski.Controller;
 
 public class TrackBankDownCommand implements MidiCommand {
 
-    public TrackBankDownCommand(Controller controller, SysexSend sysexSend) {
+    public TrackBankDownCommand(Controller controller) {
         this.controller = controller;
-
-        controller.getTracks().getTrackBank().scrollPosition().addValueObserver((int pos) -> {
-            // track.scrollPosition().get() was showing stale values
-            sysexSend.displayText("[" + (pos + 1) + "-" + (pos + 8) + "]");
-        });
     }
 
     @Override

@@ -4,10 +4,7 @@ import com.bitwig.extension.controller.ControllerExtension;
 import com.bitwig.extension.controller.api.ControllerHost;
 import com.bitwig.extension.controller.api.NoteInput;
 import net.tlipinski.commands.*;
-import net.tlipinski.observers.ChannelCountObserver;
-import net.tlipinski.observers.MuteObserver;
-import net.tlipinski.observers.RotaryBankIndexObserver;
-import net.tlipinski.observers.SoloObserver;
+import net.tlipinski.observers.*;
 
 import java.util.Arrays;
 import java.util.List;
@@ -35,8 +32,8 @@ public class NovationImpulse49Extension extends ControllerExtension {
                 new ButtonsModeCommand(controller, midiSend, sysexSend),
                 new MuteSoloCommand(controller, midiSend, sysexSend),
                 new RotaryCommand(controller, sysexSend),
-                new TrackBankUpCommand(controller, sysexSend),
-                new TrackBankDownCommand(controller, sysexSend),
+                new TrackBankUpCommand(controller),
+                new TrackBankDownCommand(controller),
                 new RotaryBankUpCommand(controller),
                 new RotaryBankDownCommand(controller),
                 new TransportCommand(host.createTransport()),
@@ -48,6 +45,7 @@ public class NovationImpulse49Extension extends ControllerExtension {
         new SoloObserver(controller, midiSend);
         new ChannelCountObserver(controller, midiSend);
         new RotaryBankIndexObserver(controller, sysexSend);
+        new TrackBankIndexObserver(controller, sysexSend);
 
         host.getMidiInPort(0).setMidiCallback(new MidiCallback(host, prefs, midiCommands));
         host.getMidiInPort(1).setMidiCallback(new MidiCallback(host, prefs, midiCommands));
