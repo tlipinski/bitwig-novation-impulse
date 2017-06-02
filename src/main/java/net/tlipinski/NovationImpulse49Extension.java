@@ -31,8 +31,10 @@ public class NovationImpulse49Extension extends ControllerExtension {
         List<MidiCommand> midiCommands = Arrays.asList(
                 new FaderCommand(controller, sysexSend),
                 new ButtonsModeCommand(controller, midiSend, sysexSend),
-                new MuteSoloCommand(controller, midiSend, sysexSend),
-                new RotaryCommand(controller, sysexSend),
+                new MuteCommand(controller, midiSend, sysexSend),
+                new SoloCommand(controller, midiSend, sysexSend),
+                new RotaryPluginCommand(controller, sysexSend),
+                new RotaryMixerCommand(controller, sysexSend),
                 new TrackBankUpCommand(controller),
                 new TrackBankDownCommand(controller),
                 new RotaryBankUpCommand(controller),
