@@ -17,6 +17,7 @@ public class NovationImpulse49Extension extends ControllerExtension {
     @Override
     public void init() {
         final ControllerHost host = getHost();
+        host.println(Version.info(host));
 
         MidiSend midiSend = new MidiSend(host);
         SysexSend sysexSend = new SysexSend(host);
