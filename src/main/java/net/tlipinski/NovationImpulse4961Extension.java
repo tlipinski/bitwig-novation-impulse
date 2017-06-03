@@ -34,26 +34,26 @@ public class NovationImpulse4961Extension extends ControllerExtension {
                 new MuteCommand(controller, midiSend, sysexSend),
                 new SingleSoloCommand(controller, midiSend, sysexSend),
                 new SoloCommand(controller, midiSend, sysexSend),
-                new RotaryPluginCommand(controller, midiSend, sysexSend),
-                new RotaryMixerCommand(controller, midiSend, sysexSend),
+                new EncoderPluginCommand(controller, midiSend, sysexSend),
+                new EncoderMixerCommand(controller, midiSend, sysexSend),
                 new TrackBankUpCommand(controller),
                 new TrackBankDownCommand(controller),
-                new RotaryMixerPageUpCommand(controller, sysexSend),
-                new RotaryMixerPageDownCommand(controller, sysexSend),
-                new RotaryPageUpCommand(controller),
-                new RotaryPageDownCommand(controller),
+                new EncoderMixerPageUpCommand(controller, sysexSend),
+                new EncoderMixerPageDownCommand(controller, sysexSend),
+                new EncoderPageUpCommand(controller),
+                new EncoderPageDownCommand(controller),
                 new TransportCommand(host.createTransport()),
                 new ShiftPressedCommand(controller),
                 new ShiftReleasedCommand(controller),
                 new NoOpShiftCommand(),
-                new RotaryPluginModeCommand(controller, midiSend, sysexSend),
-                new RotaryMixerModeCommand(controller, midiSend, sysexSend)
+                new EncoderPluginModeCommand(controller, midiSend, sysexSend),
+                new EncoderMixerModeCommand(controller, midiSend, sysexSend)
         );
 
         new MuteObserver(controller, midiSend);
         new SoloObserver(controller, midiSend);
         new ChannelCountObserver(controller, midiSend);
-        new RotaryBankIndexObserver(controller, sysexSend);
+        new EncoderBankIndexObserver(controller, sysexSend);
         new TrackBankIndexObserver(controller, sysexSend);
 
         host.getMidiInPort(0).setMidiCallback(new MidiCallback(host, prefs, midiCommands));

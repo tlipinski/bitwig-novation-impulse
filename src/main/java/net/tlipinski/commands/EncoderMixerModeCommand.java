@@ -2,14 +2,14 @@ package net.tlipinski.commands;
 
 import net.tlipinski.*;
 
-public class RotaryMixerModeCommand implements MidiCommand {
+public class EncoderMixerModeCommand implements MidiCommand {
 
-    public RotaryMixerModeCommand(Controller controller, MidiSend midiSend, SysexSend sysexSend) {
+    public EncoderMixerModeCommand(Controller controller, MidiSend midiSend, SysexSend sysexSend) {
         this.controller = controller;
         this.midiSend = midiSend;
         this.sysexSend = sysexSend;
 
-        midiSend.resetRotaryMode();
+        midiSend.resetEncoderMode();
     }
 
     @Override
@@ -19,7 +19,7 @@ public class RotaryMixerModeCommand implements MidiCommand {
 
     @Override
     public void handle(int data1, int data2) {
-        controller.changeRotaryMode(RotaryMode.MIXER);
+        controller.changeEncoderMode(EncoderMode.MIXER);
         sysexSend.displayText("Mixer");
     }
 

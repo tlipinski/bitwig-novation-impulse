@@ -1,5 +1,5 @@
 package net.tlipinski;
 
-public enum RotaryMode {
+public enum EncoderMode {
     PLUGIN, MIXER
 }

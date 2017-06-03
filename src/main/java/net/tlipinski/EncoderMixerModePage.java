@@ -1,6 +1,6 @@
 package net.tlipinski;
 
-public class RotaryMixerPage {
+public class EncoderMixerModePage {
     public enum Page {
         PAN("Pan"),
         SEND1("Send 1"),

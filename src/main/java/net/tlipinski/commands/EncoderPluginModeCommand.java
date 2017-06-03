@@ -2,9 +2,9 @@ package net.tlipinski.commands;
 
 import net.tlipinski.*;
 
-public class RotaryPluginModeCommand implements MidiCommand {
+public class EncoderPluginModeCommand implements MidiCommand {
 
-    public RotaryPluginModeCommand(Controller controller, MidiSend midiSend, SysexSend sysexSend) {
+    public EncoderPluginModeCommand(Controller controller, MidiSend midiSend, SysexSend sysexSend) {
         this.controller = controller;
         this.midiSend = midiSend;
         this.sysexSend = sysexSend;
@@ -17,7 +17,7 @@ public class RotaryPluginModeCommand implements MidiCommand {
 
     @Override
     public void handle(int data1, int data2) {
-        controller.changeRotaryMode(RotaryMode.PLUGIN);
+        controller.changeEncoderMode(EncoderMode.PLUGIN);
         sysexSend.displayText("Plugin");
     }
 

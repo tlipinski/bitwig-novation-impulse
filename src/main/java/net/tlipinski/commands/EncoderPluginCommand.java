@@ -4,9 +4,9 @@ import com.bitwig.extension.controller.api.CursorRemoteControlsPage;
 import com.bitwig.extension.controller.api.RemoteControl;
 import net.tlipinski.*;
 
-public class RotaryPluginCommand implements MidiCommand {
+public class EncoderPluginCommand implements MidiCommand {
 
-    public RotaryPluginCommand(Controller controller, MidiSend midiSend, SysexSend sysexSend) {
+    public EncoderPluginCommand(Controller controller, MidiSend midiSend, SysexSend sysexSend) {
         this.controller = controller;
         this.midiSend = midiSend;
         this.sysexSend = sysexSend;
@@ -21,14 +21,14 @@ public class RotaryPluginCommand implements MidiCommand {
 
     @Override
     public boolean triggersFor(int statusByte, int data1, int data2) {
-        return (controller.getRotaryMode() == RotaryMode.PLUGIN) &&
+        return (controller.getEncoderMode() == EncoderMode.PLUGIN) &&
                 (statusByte == 0xB1) && (0 <= data1 && data1 <= 7);
     }
 
     @Override
     public void handle(int data1, int data2) {
-        int rotaryIndex = data1;
-        RemoteControl parameter = controller.getTracks().getCursorRemoteControlsPage().getParameter(rotaryIndex);
+        int encoderIndex = data1;
+        RemoteControl parameter = controller.getTracks().getCursorRemoteControlsPage().getParameter(encoderIndex);
 
         double mod = (data2 - 64) * 0.01;
         parameter.inc(mod);

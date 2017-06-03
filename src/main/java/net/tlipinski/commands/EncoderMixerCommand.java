@@ -4,9 +4,9 @@ import com.bitwig.extension.controller.api.Parameter;
 import com.bitwig.extension.controller.api.Track;
 import net.tlipinski.*;
 
-public class RotaryMixerCommand implements MidiCommand {
+public class EncoderMixerCommand implements MidiCommand {
 
-    public RotaryMixerCommand(Controller controller, MidiSend midiSend, SysexSend sysexSend) {
+    public EncoderMixerCommand(Controller controller, MidiSend midiSend, SysexSend sysexSend) {
         this.controller = controller;
         this.midiSend = midiSend;
         this.sysexSend = sysexSend;
@@ -18,14 +18,14 @@ public class RotaryMixerCommand implements MidiCommand {
 
     @Override
     public boolean triggersFor(int statusByte, int data1, int data2) {
-        return (controller.getRotaryMode() == RotaryMode.MIXER) &&
+        return (controller.getEncoderMode() == EncoderMode.MIXER) &&
                 (statusByte == 0xB1) && (0 <= data1 && data1 <= 7);
     }
 
     @Override
     public void handle(int data1, int data2) {
-        int rotaryIndex = data1;
-        Track track = controller.getTracks().get(rotaryIndex);
+        int encoderIndex = data1;
+        Track track = controller.getTracks().get(encoderIndex);
         if (track != null) {
             Parameter param = getParameter(track);
 
@@ -41,12 +41,12 @@ public class RotaryMixerCommand implements MidiCommand {
     }
 
     private Parameter getParameter(Track track) {
-        switch (controller.getRotaryMixerPage().getPage()) {
+        switch (controller.getEncoderMixerPage().getPage()) {
             case PAN: return track.getPan();
             case SEND1: return track.sendBank().getItemAt(0);
             case SEND2: return track.sendBank().getItemAt(1);
         }
-        throw new IllegalStateException("Invalid page " + controller.getRotaryMixerPage().getPage());
+        throw new IllegalStateException("Invalid page " + controller.getEncoderMixerPage().getPage());
     }
 
     private final Controller controller;

@@ -5,12 +5,12 @@ import com.bitwig.extension.controller.api.CursorRemoteControlsPage;
 import net.tlipinski.SysexSend;
 import net.tlipinski.Controller;
 
-public class DisplayRotaryBankNameCallback implements IntegerValueChangedCallback {
+public class DisplayEncoderBankNameCallback implements IntegerValueChangedCallback {
     private final Controller controller;
     private final CursorRemoteControlsPage cursorRemoteControlsPage;
     private final SysexSend sysexSend;
 
-    public DisplayRotaryBankNameCallback(Controller controller, CursorRemoteControlsPage cursorRemoteControlsPage, SysexSend sysexSend) {
+    public DisplayEncoderBankNameCallback(Controller controller, CursorRemoteControlsPage cursorRemoteControlsPage, SysexSend sysexSend) {
         this.controller = controller;
         this.cursorRemoteControlsPage = cursorRemoteControlsPage;
         this.sysexSend = sysexSend;
@@ -24,7 +24,7 @@ public class DisplayRotaryBankNameCallback implements IntegerValueChangedCallbac
             if (page < pages.length) {
                 sysexSend.displayText(pages[page]);
             } else {
-                controller.getHost().errorln("Rotary bank page index bigger than pages size: " + page + ", pages: "+ String.join(", ", pages));
+                controller.getHost().errorln("Encoder bank page index bigger than pages size: " + page + ", pages: "+ String.join(", ", pages));
             }
         }
     }

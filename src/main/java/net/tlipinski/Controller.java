@@ -34,12 +34,12 @@ public class Controller {
         return host;
     }
 
-    public void changeRotaryMode(RotaryMode mode) {
-        this.rotaryMode = mode;
+    public void changeEncoderMode(EncoderMode mode) {
+        this.encoderMode = mode;
     }
 
-    public RotaryMode getRotaryMode() {
-        return rotaryMode;
+    public EncoderMode getEncoderMode() {
+        return encoderMode;
     }
 
     public Preferences getPreferences() {
@@ -58,8 +58,8 @@ public class Controller {
         return shiftPressed;
     }
 
-    public RotaryMixerPage getRotaryMixerPage() {
-        return rotaryMixerPage;
+    public EncoderMixerModePage getEncoderMixerPage() {
+        return encoderMixerPage;
     }
 
     private final ControllerHost host;
@@ -67,8 +67,8 @@ public class Controller {
     private final SysexSend sysexSend;
     private final Preferences preferences;
     private ButtonsMode buttonsMode = ButtonsMode.MUTE;
-    private RotaryMode rotaryMode = RotaryMode.PLUGIN;
+    private EncoderMode encoderMode = EncoderMode.PLUGIN;
     private boolean shiftPressed = false;
-    private RotaryMixerPage rotaryMixerPage = new RotaryMixerPage();
+    private EncoderMixerModePage encoderMixerPage = new EncoderMixerModePage();
 
 }
