@@ -3,9 +3,9 @@ package net.tlipinski.commands;
 import net.tlipinski.MidiCommand;
 import net.tlipinski.Controller;
 
-public class RotaryBankDownCommand implements MidiCommand {
+public class RotaryPageDownCommand implements MidiCommand {
 
-    public RotaryBankDownCommand(Controller controller) {
+    public RotaryPageDownCommand(Controller controller) {
         this.controller = controller;
     }
 
