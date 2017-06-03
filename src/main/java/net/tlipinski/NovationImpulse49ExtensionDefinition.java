@@ -78,12 +78,12 @@ public class NovationImpulse49ExtensionDefinition extends ControllerExtensionDef
          // list.add(new String[]{"Input Port 0", "Input Port 1"}, new String[]{"Output Port 0", "Output Port 1"});
       }
       else if (platformType == PlatformType.MAC) {
-         // TODO: Set the correct names of the ports for auto detection on Windows platform here
-         // and uncomment this when port names are correct.
-         // list.add(new String[]{"Input Port 0", "Input Port 1"}, new String[]{"Output Port 0", "Output Port 1"});
+         String[] inputPortNames = { "Impulse  Impulse ", "Impulse  Impulse MIDI In " };
+         String[] outputPortNames = { "Impulse  Impulse " };
+         list.add(inputPortNames, outputPortNames);
       }
       else if (platformType == PlatformType.LINUX) {
-         // TODO: Set the correct names of the ports for auto detection on Windows platform here
+         // TODO: Set the correct names of the ports for auto detection on Linux platform here
          // and uncomment this when port names are correct.
          // list.add(new String[]{"Input Port 0", "Input Port 1"}, new String[]{"Output Port 0", "Output Port 1"});
       }
