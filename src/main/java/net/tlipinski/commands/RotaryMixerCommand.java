@@ -1,10 +1,8 @@
 package net.tlipinski.commands;
 
+import com.bitwig.extension.controller.api.Parameter;
 import com.bitwig.extension.controller.api.Track;
-import net.tlipinski.Controller;
-import net.tlipinski.MidiCommand;
-import net.tlipinski.RotaryMode;
-import net.tlipinski.SysexSend;
+import net.tlipinski.*;
 
 public class RotaryMixerCommand implements MidiCommand {
 
@@ -27,10 +25,25 @@ public class RotaryMixerCommand implements MidiCommand {
     public void handle(int data1, int data2) {
         int rotaryIndex = data1;
         Track track = controller.getTracks().get(rotaryIndex);
-        double mod = (data2 - 64) * 0.03;
-        track.getPan().inc(mod);
+        if (track != null) {
+            Parameter param = getParameter(track);
 
-        sysexSend.displayText("Pan");
+            double mod = (data2 - 64) * 0.03;
+            param.inc(mod);
+
+            sysexSend.displayText(track.name().get());
+        } else {
+            sysexSend.displayText("<empty>");
+        }
+    }
+
+    private Parameter getParameter(Track track) {
+        switch (controller.getRotaryMixerPage().getPage()) {
+            case PAN: return track.getPan();
+            case SEND1: return track.sendBank().getItemAt(0);
+            case SEND2: return track.sendBank().getItemAt(1);
+        }
+        throw new IllegalStateException("Invalid page " + controller.getRotaryMixerPage().getPage());
     }
 
     private final Controller controller;

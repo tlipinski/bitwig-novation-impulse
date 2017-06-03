@@ -38,6 +38,8 @@ public class NovationImpulse4961Extension extends ControllerExtension {
                 new RotaryMixerCommand(controller, sysexSend),
                 new TrackBankUpCommand(controller),
                 new TrackBankDownCommand(controller),
+                new RotaryMixerPageUpCommand(controller, sysexSend),
+                new RotaryMixerPageDownCommand(controller, sysexSend),
                 new RotaryPageUpCommand(controller),
                 new RotaryPageDownCommand(controller),
                 new TransportCommand(host.createTransport()),

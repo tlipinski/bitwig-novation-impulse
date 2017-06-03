@@ -2,10 +2,8 @@ package net.tlipinski;
 
 import com.bitwig.extension.controller.api.*;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Controller {
+
     public Controller(ControllerHost host, Tracks tracks, SysexSend sysexSend, Preferences preferences) {
         this.host = host;
         this.tracks = tracks;
@@ -60,6 +58,10 @@ public class Controller {
         return shiftPressed;
     }
 
+    public RotaryMixerPage getRotaryMixerPage() {
+        return rotaryMixerPage;
+    }
+
     private final ControllerHost host;
     private final Tracks tracks;
     private final SysexSend sysexSend;
@@ -67,5 +69,6 @@ public class Controller {
     private ButtonsMode buttonsMode = ButtonsMode.MUTE;
     private RotaryMode rotaryMode = RotaryMode.PLUGIN;
     private boolean shiftPressed = false;
+    private RotaryMixerPage rotaryMixerPage = new RotaryMixerPage();
 
 }
