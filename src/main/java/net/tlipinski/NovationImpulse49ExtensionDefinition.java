@@ -5,6 +5,9 @@ import com.bitwig.extension.controller.AutoDetectionMidiPortNamesList;
 import com.bitwig.extension.controller.ControllerExtensionDefinition;
 import com.bitwig.extension.controller.api.ControllerHost;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.UUID;
 
 public class NovationImpulse49ExtensionDefinition extends ControllerExtensionDefinition
@@ -28,9 +31,8 @@ public class NovationImpulse49ExtensionDefinition extends ControllerExtensionDef
    }
 
    @Override
-   public String getVersion()
-   {
-      return "1.0";
+   public String getVersion() {
+       return Version.get();
    }
 
    @Override
