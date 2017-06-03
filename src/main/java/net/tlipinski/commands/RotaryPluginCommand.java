@@ -2,15 +2,13 @@ package net.tlipinski.commands;
 
 import com.bitwig.extension.controller.api.CursorRemoteControlsPage;
 import com.bitwig.extension.controller.api.RemoteControl;
-import net.tlipinski.Controller;
-import net.tlipinski.MidiCommand;
-import net.tlipinski.RotaryMode;
-import net.tlipinski.SysexSend;
+import net.tlipinski.*;
 
 public class RotaryPluginCommand implements MidiCommand {
 
-    public RotaryPluginCommand(Controller controller, SysexSend sysexSend) {
+    public RotaryPluginCommand(Controller controller, MidiSend midiSend, SysexSend sysexSend) {
         this.controller = controller;
+        this.midiSend = midiSend;
         this.sysexSend = sysexSend;
 
         CursorRemoteControlsPage cursorRemoteControlsPage = controller.getTracks().getCursorRemoteControlsPage();
@@ -36,10 +34,12 @@ public class RotaryPluginCommand implements MidiCommand {
         parameter.inc(mod);
 
         sysexSend.displayText(parameter.name().get());
-        sysexSend.displayNumber(parameter.get(), 100);
+        int val = (int) (parameter.get() * 100);
+        midiSend.send(0xB1, data1, val);
     }
 
     private final Controller controller;
+    private final MidiSend midiSend;
     private final SysexSend sysexSend;
 
 }

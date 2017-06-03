@@ -6,8 +6,9 @@ import net.tlipinski.*;
 
 public class RotaryMixerCommand implements MidiCommand {
 
-    public RotaryMixerCommand(Controller controller, SysexSend sysexSend) {
+    public RotaryMixerCommand(Controller controller, MidiSend midiSend, SysexSend sysexSend) {
         this.controller = controller;
+        this.midiSend = midiSend;
         this.sysexSend = sysexSend;
 
         for (int i = 0; i < 8; i++) {
@@ -32,7 +33,8 @@ public class RotaryMixerCommand implements MidiCommand {
             param.inc(mod);
 
             sysexSend.displayText(track.name().get());
-            sysexSend.displayNumber(param.get(), 100);
+            int val = (int) (param.get() * 100);
+            midiSend.send(0xB1, data1, val);
         } else {
             sysexSend.displayText("<empty>");
         }
@@ -48,6 +50,7 @@ public class RotaryMixerCommand implements MidiCommand {
     }
 
     private final Controller controller;
+    private final MidiSend midiSend;
     private final SysexSend sysexSend;
 
 }
