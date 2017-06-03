@@ -28,6 +28,11 @@ public class SysexSend {
         midiOut.sendSysex(sysexHeader + "09 " + hex + " F7");
     }
 
+    public void displayNumber(double number, int scale) {
+        String hex = toHexString(String.format("%3d", (int)(number * scale)));
+        midiOut.sendSysex(sysexHeader + "09 " + hex + " F7");
+    }
+
     private String toHexString(String sub) {
         byte[] bytes = sub.getBytes();
 

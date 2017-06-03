@@ -28,10 +28,11 @@ public class RotaryMixerCommand implements MidiCommand {
         if (track != null) {
             Parameter param = getParameter(track);
 
-            double mod = (data2 - 64) * 0.03;
+            double mod = (data2 - 64) * 0.01;
             param.inc(mod);
 
             sysexSend.displayText(track.name().get());
+            sysexSend.displayNumber(param.get(), 100);
         } else {
             sysexSend.displayText("<empty>");
         }

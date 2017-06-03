@@ -16,6 +16,10 @@ public class MidiSend {
         }
     }
 
+    public void send(int status, int data1, int data2) {
+        host.getMidiOutPort(0).sendMidi(status, data1, data2);
+    }
+
     public void resetRotaryMode() {
         host.getMidiOutPort(0).sendMidi(0xB1, 10, 1);
     }

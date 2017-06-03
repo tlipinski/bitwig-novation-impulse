@@ -32,10 +32,11 @@ public class RotaryPluginCommand implements MidiCommand {
         int rotaryIndex = data1;
         RemoteControl parameter = controller.getTracks().getCursorRemoteControlsPage().getParameter(rotaryIndex);
 
-        double mod = (data2 - 64) * 0.03;
+        double mod = (data2 - 64) * 0.01;
         parameter.inc(mod);
 
         sysexSend.displayText(parameter.name().get());
+        sysexSend.displayNumber(parameter.get(), 100);
     }
 
     private final Controller controller;
