@@ -32,6 +32,7 @@ public class NovationImpulse4961Extension extends ControllerExtension {
                 new FaderCommand(controller, sysexSend),
                 new ButtonsModeCommand(controller, midiSend, sysexSend),
                 new MuteCommand(controller, midiSend, sysexSend),
+                new SingleSoloCommand(controller, midiSend, sysexSend),
                 new SoloCommand(controller, midiSend, sysexSend),
                 new RotaryPluginCommand(controller, sysexSend),
                 new RotaryMixerCommand(controller, sysexSend),
@@ -40,6 +41,9 @@ public class NovationImpulse4961Extension extends ControllerExtension {
                 new RotaryBankUpCommand(controller),
                 new RotaryBankDownCommand(controller),
                 new TransportCommand(host.createTransport()),
+                new ShiftPressedCommand(controller),
+                new ShiftReleasedCommand(controller),
+                new NoOpShiftCommand(),
                 new RotaryPluginModeCommand(controller, midiSend, sysexSend),
                 new RotaryMixerModeCommand(controller, midiSend, sysexSend)
         );

@@ -48,11 +48,24 @@ public class Controller {
         return preferences;
     }
 
+    public void shiftPressed() {
+        this.shiftPressed = true;
+    }
+
+    public void shiftReleased() {
+        this.shiftPressed = false;
+    }
+
+    public boolean isShiftPressed() {
+        return shiftPressed;
+    }
+
     private final ControllerHost host;
     private final Tracks tracks;
     private final SysexSend sysexSend;
     private final Preferences preferences;
     private ButtonsMode buttonsMode = ButtonsMode.MUTE;
     private RotaryMode rotaryMode = RotaryMode.PLUGIN;
+    private boolean shiftPressed = false;
 
 }

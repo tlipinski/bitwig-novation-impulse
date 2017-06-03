@@ -9,6 +9,8 @@ public class ButtonsModeCommand implements MidiCommand {
         this.controller = controller;
         this.midiSend = midiSend;
         this.sysexSend = sysexSend;
+
+        midiSend.resetButtonsMode();
     }
 
     @Override

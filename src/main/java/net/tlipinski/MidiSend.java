@@ -20,6 +20,11 @@ public class MidiSend {
         host.getMidiOutPort(0).sendMidi(0xB1, 10, 1);
     }
 
+    public void resetButtonsMode() {
+        // TODO why it doesn't work?
+        host.getMidiOutPort(0).sendMidi(0xB0, 34, 1);
+    }
+
     private void lightOn(int index) {
         host.getMidiOutPort(0).sendMidi(0xB0, 9 + index, 1);
     }
