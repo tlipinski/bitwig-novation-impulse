@@ -86,7 +86,16 @@ public class NovationImpulse4961Extension extends ControllerExtension {
         String aftertouch = "D0????";
         String pitchWheel = "E0????";
         String modWheel = "B201??";
-        return host.getMidiInPort(index).createNoteInput("Impulse Keyboard", notePress, noteRelease, aftertouch, pitchWheel, modWheel);
+        String padNote = "99????";
+        String padVelocity = "D9????";
+        return host.getMidiInPort(index).createNoteInput("Impulse Keyboard",
+            notePress,
+            noteRelease,
+            aftertouch,
+            pitchWheel,
+            padNote,
+            padVelocity,
+            modWheel);
     }
 
 }
