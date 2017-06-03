@@ -46,6 +46,8 @@ public class NovationImpulse4961Extension extends ControllerExtension {
                 new ShiftPressedCommand(controller),
                 new ShiftReleasedCommand(controller),
                 new NoOpShiftCommand(),
+                new TrackPreviousCommand(controller, sysexSend),
+                new TrackNextCommand(controller, sysexSend),
                 new EncoderPluginModeCommand(controller, midiSend, sysexSend),
                 new EncoderMixerModeCommand(controller, midiSend, sysexSend)
         );

@@ -72,6 +72,10 @@ public class Tracks {
         return result;
     }
 
+    public CursorTrack getCursorTrack() {
+        return cursorTrack;
+    }
+
     private final TrackBank trackBank;
     private final MasterTrack masterTrack;
     private final PinnableCursorDevice cursorDevice;
