@@ -5,23 +5,20 @@ import com.bitwig.extension.controller.AutoDetectionMidiPortNamesList;
 import com.bitwig.extension.controller.ControllerExtensionDefinition;
 import com.bitwig.extension.controller.api.ControllerHost;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.UUID;
 
-public class NovationImpulse49ExtensionDefinition extends ControllerExtensionDefinition
+public class NovationImpulse4961ExtensionDefinition extends ControllerExtensionDefinition
 {
    private static final UUID DRIVER_ID = UUID.fromString("c502ace6-b694-4037-a924-4476f9062b0f");
    
-   public NovationImpulse49ExtensionDefinition()
+   public NovationImpulse4961ExtensionDefinition()
    {
    }
 
    @Override
    public String getName()
    {
-      return "Novation Impulse 49";
+      return "Novation Impulse 49/61";
    }
    
    @Override
@@ -50,7 +47,7 @@ public class NovationImpulse49ExtensionDefinition extends ControllerExtensionDef
    @Override
    public String getHardwareModel()
    {
-      return "Impulse 49";
+      return "Impulse 49/61";
    }
 
    @Override
@@ -92,8 +89,8 @@ public class NovationImpulse49ExtensionDefinition extends ControllerExtensionDef
    }
 
    @Override
-   public NovationImpulse49Extension createInstance(final ControllerHost host)
+   public NovationImpulse4961Extension createInstance(final ControllerHost host)
    {
-      return new NovationImpulse49Extension(this, host);
+      return new NovationImpulse4961Extension(this, host);
    }
 }

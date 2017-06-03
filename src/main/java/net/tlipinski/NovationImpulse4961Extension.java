@@ -9,8 +9,8 @@ import net.tlipinski.observers.*;
 import java.util.Arrays;
 import java.util.List;
 
-public class NovationImpulse49Extension extends ControllerExtension {
-    protected NovationImpulse49Extension(final NovationImpulse49ExtensionDefinition definition, final ControllerHost host) {
+public class NovationImpulse4961Extension extends ControllerExtension {
+    protected NovationImpulse4961Extension(final NovationImpulse4961ExtensionDefinition definition, final ControllerHost host) {
         super(definition, host);
     }
 

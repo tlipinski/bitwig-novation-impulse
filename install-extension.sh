@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-cp target/NovationImpulse49.bwextension ~/Bitwig\ Studio/Extensions
+cp target/NovationImpulse4961.bwextension ~/Bitwig\ Studio/Extensions
