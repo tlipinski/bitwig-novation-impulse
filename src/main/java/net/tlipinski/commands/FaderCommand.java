@@ -23,6 +23,7 @@ public class FaderCommand implements MidiCommand {
         if (t != null) {
             t.getVolume().set(data2, 128);
             this.sysexSend.displayText(t.name().get());
+            this.sysexSend.displayNumber(data2);
         } else {
             this.sysexSend.displayText("<empty>");
         }

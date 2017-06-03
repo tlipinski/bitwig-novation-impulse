@@ -23,6 +23,11 @@ public class SysexSend {
         }
     }
 
+    public void displayNumber(int number) {
+        String hex = toHexString(String.format("%3d", number));
+        midiOut.sendSysex(sysexHeader + "09 " + hex + " F7");
+    }
+
     private String toHexString(String sub) {
         byte[] bytes = sub.getBytes();
 
