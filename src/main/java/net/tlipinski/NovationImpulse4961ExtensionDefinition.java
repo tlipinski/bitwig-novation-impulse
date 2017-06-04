@@ -72,9 +72,9 @@ public class NovationImpulse4961ExtensionDefinition extends ControllerExtensionD
    public void listAutoDetectionMidiPortNames(final AutoDetectionMidiPortNamesList list, final PlatformType platformType)
    {
       if (platformType == PlatformType.WINDOWS) {
-         // TODO: Set the correct names of the ports for auto detection on Windows platform here
-         // and uncomment this when port names are correct.
-         // list.add(new String[]{"Input Port 0", "Input Port 1"}, new String[]{"Output Port 0", "Output Port 1"});
+          String[] inputPortNames = { "Novation Impulse", "MIDIIN2 (Novation Impulse)" };
+          String[] outputPortNames = { "Novation Impulse" };
+          list.add(inputPortNames, outputPortNames);
       }
       else if (platformType == PlatformType.MAC) {
          String[] inputPortNames = { "Impulse  Impulse ", "Impulse  Impulse MIDI In " };
