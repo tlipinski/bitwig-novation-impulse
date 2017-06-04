@@ -2,6 +2,8 @@ package net.tlipinski.bitwig.controller.commands;
 
 import net.tlipinski.bitwig.controller.*;
 
+import java.util.stream.Stream;
+
 public class EncoderMixerModeCommand implements MidiCommand {
 
     public EncoderMixerModeCommand(Controller controller, MidiSend midiSend, SysexSend sysexSend) {
@@ -14,7 +16,10 @@ public class EncoderMixerModeCommand implements MidiCommand {
 
     @Override
     public boolean triggersFor(int statusByte, int data1, int data2) {
-        return statusByte == 0xB1 && (data1 == 9);
+        return Stream.of(
+                statusByte == 0xB1,
+                data1 == 9
+        ).allMatch(b -> b);
     }
 
     @Override

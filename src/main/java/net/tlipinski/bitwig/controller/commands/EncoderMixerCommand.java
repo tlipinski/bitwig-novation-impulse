@@ -4,6 +4,8 @@ import com.bitwig.extension.controller.api.Parameter;
 import com.bitwig.extension.controller.api.Track;
 import net.tlipinski.bitwig.controller.*;
 
+import java.util.stream.Stream;
+
 public class EncoderMixerCommand implements MidiCommand {
 
     public EncoderMixerCommand(Controller controller, MidiSend midiSend, SysexSend sysexSend) {
@@ -18,8 +20,12 @@ public class EncoderMixerCommand implements MidiCommand {
 
     @Override
     public boolean triggersFor(int statusByte, int data1, int data2) {
-        return (controller.getEncoderMode() == EncoderMode.MIXER) &&
-                (statusByte == 0xB1) && (0 <= data1 && data1 <= 7);
+        return Stream.of(
+                controller.getEncoderMode() == EncoderMode.MIXER,
+                statusByte == 0xB1,
+                data1 >= 0,
+                data1 <= 7
+        ).allMatch(b -> b);
     }
 
     @Override

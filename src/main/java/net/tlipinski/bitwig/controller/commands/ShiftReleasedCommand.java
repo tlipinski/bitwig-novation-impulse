@@ -3,6 +3,8 @@ package net.tlipinski.bitwig.controller.commands;
 import net.tlipinski.bitwig.controller.Controller;
 import net.tlipinski.bitwig.controller.MidiCommand;
 
+import java.util.stream.Stream;
+
 public class ShiftReleasedCommand implements MidiCommand {
 
     public ShiftReleasedCommand(Controller controller) {
@@ -11,7 +13,11 @@ public class ShiftReleasedCommand implements MidiCommand {
 
     @Override
     public boolean triggersFor(int statusByte, int data1, int data2) {
-        return (statusByte == 0xB1) && (data1 == 13) && (data2 == 0);
+        return Stream.of(
+                statusByte == 0xB1,
+                data1 == 13,
+                data2 == 0
+        ).allMatch(b -> b);
     }
 
     @Override

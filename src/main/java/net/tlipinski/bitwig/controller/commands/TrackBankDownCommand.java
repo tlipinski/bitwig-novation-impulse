@@ -1,7 +1,9 @@
 package net.tlipinski.bitwig.controller.commands;
 
-import net.tlipinski.bitwig.controller.MidiCommand;
 import net.tlipinski.bitwig.controller.Controller;
+import net.tlipinski.bitwig.controller.MidiCommand;
+
+import java.util.stream.Stream;
 
 public class TrackBankDownCommand implements MidiCommand {
 
@@ -11,7 +13,10 @@ public class TrackBankDownCommand implements MidiCommand {
 
     @Override
     public boolean triggersFor(int statusByte, int data1, int data2) {
-        return statusByte == 0xB0 && (data1 == 36);
+        return Stream.of(
+                statusByte == 0xB0,
+                data1 == 36
+        ).allMatch(b -> b);
     }
 
     @Override

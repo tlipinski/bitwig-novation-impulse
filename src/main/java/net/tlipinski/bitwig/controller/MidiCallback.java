@@ -14,19 +14,18 @@ public class MidiCallback implements ShortMidiDataReceivedCallback {
 
     @Override
     public void midiReceived(int statusByte, int data1, int data2) {
-        if (prefs.debug()) {
-            host.println("Command: " + String.format("%2X", statusByte) + ":" + data1 + ":" + data2);
-        }
-
         for (MidiCommand cmd : midiCommands) {
             if (cmd.triggersFor(statusByte, data1, data2)) {
+                if (prefs.debug()) {
+                    host.println("[" + String.format("%2X", statusByte) + ":" + data1 + ":" + data2 + "] -> " + cmd.getClass().toString());
+                }
                 cmd.handle(data1, data2);
                 return ;
             }
         }
 
         if (prefs.debug()) {
-            host.errorln("Unhandled command: " + String.format("%2X", statusByte) + ":" + data1 + ":" + data2);
+            host.errorln("[" + String.format("%2X", statusByte) + ":" + data1 + ":" + data2 + "] -> unhandled");
         }
     }
 
