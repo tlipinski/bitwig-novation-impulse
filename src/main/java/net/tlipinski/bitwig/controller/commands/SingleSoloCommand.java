@@ -3,6 +3,8 @@ package net.tlipinski.bitwig.controller.commands;
 import com.bitwig.extension.controller.api.Track;
 import net.tlipinski.bitwig.controller.*;
 
+import java.util.stream.Stream;
+
 public class SingleSoloCommand implements MidiCommand {
 
     public SingleSoloCommand(Controller controller, MidiSend midiSend, SysexSend sysexSend) {
@@ -13,10 +15,13 @@ public class SingleSoloCommand implements MidiCommand {
 
     @Override
     public boolean triggersFor(int statusByte, int data1, int data2) {
-        return (controller.getButtonsMode() == ButtonsMode.SOLO) &&
-                (controller.isShiftPressed()) &&
-                (statusByte == 0xB0) &&
-                (9 <= data1 && data1 <= 17);
+        return Stream.of(
+                controller.getButtonsMode() == ButtonsMode.SOLO,
+                controller.isShiftPressed(),
+                statusByte == 0xB0,
+                data1 >= 9,
+                data1 <= 17
+        ).allMatch(b -> b);
     }
 
     @Override

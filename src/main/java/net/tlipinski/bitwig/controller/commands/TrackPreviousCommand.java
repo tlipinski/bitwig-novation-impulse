@@ -6,6 +6,8 @@ import net.tlipinski.bitwig.controller.Controller;
 import net.tlipinski.bitwig.controller.MidiCommand;
 import net.tlipinski.bitwig.controller.SysexSend;
 
+import java.util.stream.Stream;
+
 public class TrackPreviousCommand implements MidiCommand {
 
     public TrackPreviousCommand(Controller controller, SysexSend sysexSend) {
@@ -21,7 +23,11 @@ public class TrackPreviousCommand implements MidiCommand {
 
     @Override
     public boolean triggersFor(int statusByte, int data1, int data2) {
-        return (statusByte == 0xB0) && (data1 == 38) && (data2 == 1);
+        return Stream.of(
+                statusByte == 0xB0,
+                data1 == 38,
+                data2 == 1
+        ).allMatch(b -> b);
     }
 
     @Override

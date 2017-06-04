@@ -4,6 +4,8 @@ import com.bitwig.extension.controller.api.CursorRemoteControlsPage;
 import com.bitwig.extension.controller.api.RemoteControl;
 import net.tlipinski.bitwig.controller.*;
 
+import java.util.stream.Stream;
+
 public class EncoderPluginCommand implements MidiCommand {
 
     public EncoderPluginCommand(Controller controller, MidiSend midiSend, SysexSend sysexSend) {
@@ -21,8 +23,12 @@ public class EncoderPluginCommand implements MidiCommand {
 
     @Override
     public boolean triggersFor(int statusByte, int data1, int data2) {
-        return (controller.getEncoderMode() == EncoderMode.PLUGIN) &&
-                (statusByte == 0xB1) && (0 <= data1 && data1 <= 7);
+        return Stream.of(
+                controller.getEncoderMode() == EncoderMode.PLUGIN,
+                statusByte == 0xB1,
+                data1 >= 0,
+                data1 <= 7
+        ).allMatch(b -> b);
     }
 
     @Override

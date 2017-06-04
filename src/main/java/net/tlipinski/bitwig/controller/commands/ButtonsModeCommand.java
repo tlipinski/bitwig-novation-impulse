@@ -3,6 +3,8 @@ package net.tlipinski.bitwig.controller.commands;
 import net.tlipinski.bitwig.controller.*;
 import net.tlipinski.bitwig.controller.observers.callbacks.RefreshAllLightsCallback;
 
+import java.util.stream.Stream;
+
 public class ButtonsModeCommand implements MidiCommand {
 
     public ButtonsModeCommand(Controller controller, MidiSend midiSend, SysexSend sysexSend) {
@@ -15,7 +17,10 @@ public class ButtonsModeCommand implements MidiCommand {
 
     @Override
     public boolean triggersFor(int statusByte, int data1, int data2) {
-        return statusByte == 0xB0 && (data1 == 34);
+        return Stream.of(
+                statusByte == 0xB0,
+                data1 == 34
+        ).allMatch(b -> b);
     }
 
     @Override

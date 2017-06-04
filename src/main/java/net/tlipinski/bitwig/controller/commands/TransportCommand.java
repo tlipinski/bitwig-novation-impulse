@@ -3,6 +3,8 @@ package net.tlipinski.bitwig.controller.commands;
 import com.bitwig.extension.controller.api.Transport;
 import net.tlipinski.bitwig.controller.MidiCommand;
 
+import java.util.stream.Stream;
+
 public class TransportCommand implements MidiCommand {
 
     public TransportCommand(Transport transport) {
@@ -11,7 +13,11 @@ public class TransportCommand implements MidiCommand {
 
     @Override
     public boolean triggersFor(int statusByte, int data1, int data2) {
-        return statusByte == 0xB0 && (27 <= data1 && data1 <= 32);
+        return Stream.of(
+                statusByte == 0xB0,
+                data1 >= 27,
+                data1 <= 32
+        ).allMatch(b -> b);
     }
 
     @Override
