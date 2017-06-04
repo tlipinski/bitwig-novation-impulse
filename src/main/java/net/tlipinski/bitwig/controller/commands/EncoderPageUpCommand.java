@@ -15,7 +15,7 @@ public class EncoderPageUpCommand implements MidiCommand {
     public boolean triggersFor(int statusByte, int data1, int data2) {
         return Stream.of(
                 statusByte == 0xB1,
-                data1 == 1
+                data1 == 11
         ).allMatch(b -> b);
     }
 
