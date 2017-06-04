@@ -15,6 +15,8 @@ public class EncoderMixerCommand implements MidiCommand {
 
         for (int i = 0; i < 8; i++) {
             controller.getTracks().getTrackBank().getChannel(i).getPan().markInterested();
+            controller.getTracks().getTrackBank().getChannel(i).sendBank().getItemAt(0).markInterested();
+            controller.getTracks().getTrackBank().getChannel(i).sendBank().getItemAt(1).markInterested();
         }
     }
 
