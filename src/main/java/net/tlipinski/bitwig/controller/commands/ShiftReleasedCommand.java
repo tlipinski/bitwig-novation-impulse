@@ -12,12 +12,12 @@ public class ShiftReleasedCommand implements MidiCommand {
     }
 
     @Override
-    public boolean triggersFor(int statusByte, int data1, int data2) {
+    public Stream<Boolean> conditions(int statusByte, int data1, int data2) {
         return Stream.of(
                 statusByte == 0xB1,
                 data1 == 13,
                 data2 == 0
-        ).allMatch(b -> b);
+        );
     }
 
     @Override

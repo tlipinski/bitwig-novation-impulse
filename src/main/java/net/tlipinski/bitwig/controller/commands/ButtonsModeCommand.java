@@ -16,11 +16,11 @@ public class ButtonsModeCommand implements MidiCommand {
     }
 
     @Override
-    public boolean triggersFor(int statusByte, int data1, int data2) {
+    public Stream<Boolean> conditions(int statusByte, int data1, int data2) {
         return Stream.of(
                 statusByte == 0xB0,
                 data1 == 34
-        ).allMatch(b -> b);
+        );
     }
 
     @Override
