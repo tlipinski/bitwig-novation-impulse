@@ -14,14 +14,14 @@ public class SingleSoloCommand implements MidiCommand {
     }
 
     @Override
-    public boolean triggersFor(int statusByte, int data1, int data2) {
+    public Stream<Boolean> conditions(int statusByte, int data1, int data2) {
         return Stream.of(
                 controller.getButtonsMode() == ButtonsMode.SOLO,
                 controller.isShiftPressed(),
                 statusByte == 0xB0,
                 data1 >= 9,
                 data1 <= 17
-        ).allMatch(b -> b);
+        );
     }
 
     @Override
