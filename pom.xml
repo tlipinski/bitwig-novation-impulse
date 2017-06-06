@@ -6,7 +6,7 @@
   <artifactId>bitwig-novation-impulse-49-61</artifactId>
   <packaging>jar</packaging>
   <name>Novation Impulse 49/61</name>
-  <version>1.0-beta.2-SNAPSHOT</version>
+  <version>1.0-beta.2</version>
 
   <repositories>
     <repository>
