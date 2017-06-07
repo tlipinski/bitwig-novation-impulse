@@ -17,7 +17,7 @@ public class MidiCallback implements ShortMidiDataReceivedCallback {
         for (MidiCommand cmd : midiCommands) {
             if (cmd.triggersFor(statusByte, data1, data2)) {
                 if (prefs.debug()) {
-                    host.println("[" + String.format("%2X", statusByte) + ":" + data1 + ":" + data2 + "] -> " + cmd.getClass().toString());
+                    host.println("[" + String.format("%2X", statusByte) + ":" + data1 + ":" + data2 + "] -> " + cmd.getClass().getSimpleName());
                 }
                 cmd.handle(data1, data2);
                 return ;
