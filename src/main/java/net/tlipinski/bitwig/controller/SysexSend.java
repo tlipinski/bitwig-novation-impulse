@@ -16,6 +16,10 @@ public class SysexSend {
         midiOut.sendSysex(sysexHeader + " 06 01 01 01 F7");
     }
 
+    public void sendTemplate(String template) {
+        midiOut.sendSysex(template);
+    }
+
     public void displayText(String text) {
         if (text.length() != 0) {
             String hex = toHexString(text.substring(0, Math.min(text.length(), maxLength)));

@@ -22,7 +22,7 @@ public class NovationImpulse4961Extension extends ControllerExtension {
         MidiSend midiSend = new MidiSend(host);
         SysexSend sysexSend = new SysexSend(host);
 
-        Preferences prefs = new Preferences(host);
+        Preferences prefs = new Preferences(host, sysexSend);
 
         Tracks tracks = new Tracks(host);
 
