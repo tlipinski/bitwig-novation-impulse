@@ -51,7 +51,7 @@
         <executions>
           <execution>
             <id>rename-file</id>
-            <phase>install</phase>
+            <phase>package</phase>
             <goals>
               <goal>copy</goal>
             </goals>
