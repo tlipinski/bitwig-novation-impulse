@@ -5,9 +5,9 @@ import net.tlipinski.bitwig.controller.MidiCommand;
 
 import java.util.stream.Stream;
 
-public class TransportCommand implements MidiCommand {
+public class TransportRecordCommand implements MidiCommand {
 
-    public TransportCommand(Transport transport) {
+    public TransportRecordCommand(Transport transport) {
         this.transport = transport;
     }
 
@@ -15,22 +15,14 @@ public class TransportCommand implements MidiCommand {
     public Stream<Boolean> conditions(int statusByte, int data1, int data2) {
         return Stream.of(
                 statusByte == 0xB0,
-                data1 >= 27,
-                data1 <= 32
+                data1 == 32
         );
     }
 
     @Override
     public void handle(int data1, int data2) {
         if (data2 == 1) {
-            switch (data1) {
-                case 27: transport.rewind(); break;
-                case 28: transport.fastForward(); break;
-                case 29: transport.stop(); break;
-                case 30: transport.play(); break;
-                case 31: transport.isArrangerLoopEnabled().toggle(); break;
-                case 32: transport.record(); break;
-            }
+            transport.record();
         }
     }
 
