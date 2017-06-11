@@ -14,7 +14,7 @@ public class SingleMuteCommand implements MidiCommand {
     }
 
     @Override
-    public Stream<Boolean> conditions(int statusByte, int data1, int data2) {
+    public Stream<Boolean> triggersWhen(int statusByte, int data1, int data2) {
         return Stream.of(
                 controller.getButtonsMode() == ButtonsMode.MUTE,
                 controller.isShiftPressed(),

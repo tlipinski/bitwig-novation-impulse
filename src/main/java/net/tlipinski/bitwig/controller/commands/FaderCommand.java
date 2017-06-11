@@ -17,7 +17,7 @@ public class FaderCommand implements MidiCommand {
     }
 
     @Override
-    public Stream<Boolean> conditions(int statusByte, int data1, int data2) {
+    public Stream<Boolean> triggersWhen(int statusByte, int data1, int data2) {
         return Stream.of(
                 statusByte == 0xB0,
                 data1 >= 0,

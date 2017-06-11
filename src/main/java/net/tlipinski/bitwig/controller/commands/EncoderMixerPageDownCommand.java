@@ -15,7 +15,7 @@ public class EncoderMixerPageDownCommand implements MidiCommand {
     }
 
     @Override
-    public Stream<Boolean> conditions(int statusByte, int data1, int data2) {
+    public Stream<Boolean> triggersWhen(int statusByte, int data1, int data2) {
         return Stream.of(
                 controller.getEncoderMode() == EncoderMode.MIXER,
                 statusByte == 0xB1,

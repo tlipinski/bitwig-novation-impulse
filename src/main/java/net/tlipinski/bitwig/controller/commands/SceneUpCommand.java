@@ -20,7 +20,7 @@ public class SceneUpCommand implements MidiCommand {
     }
 
     @Override
-    public Stream<Boolean> conditions(int statusByte, int data1, int data2) {
+    public Stream<Boolean> triggersWhen(int statusByte, int data1, int data2) {
         return Stream.of(
                 application.panelLayout().get().equals(Application.PANEL_LAYOUT_MIX),
                 statusByte == 0xB0,
