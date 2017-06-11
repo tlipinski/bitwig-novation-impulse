@@ -14,6 +14,9 @@ public class Tracks {
 
         this.cursorDevice = cursorTrack.createCursorDevice();
 
+        // one scene bank is actually one scene
+        sceneBank = host.createSceneBank(1);
+
         PinnableCursorDevice cursorDevice = cursorTrack.createCursorDevice();
         this.cursorRemoteControlsPage = cursorDevice.createCursorRemoteControlsPage(8);
 
@@ -72,6 +75,10 @@ public class Tracks {
         return result;
     }
 
+    public SceneBank getSceneBank() {
+        return sceneBank;
+    }
+
     public CursorTrack getCursorTrack() {
         return cursorTrack;
     }
@@ -83,4 +90,7 @@ public class Tracks {
     private final CursorRemoteControlsPage cursorRemoteControlsPage;
 
     private final CursorTrack cursorTrack;
+
+    private final SceneBank sceneBank;
+
 }

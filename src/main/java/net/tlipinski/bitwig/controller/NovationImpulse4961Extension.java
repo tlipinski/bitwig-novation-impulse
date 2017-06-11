@@ -29,6 +29,9 @@ public class NovationImpulse4961Extension extends ControllerExtension {
         Controller controller = new Controller(host, tracks, sysexSend, prefs);
 
         List<MidiCommand> midiCommands = Arrays.asList(
+                new SceneUpCommand(controller),
+                new SceneDownCommand(controller),
+                new SceneLaunchCommand(controller),
                 new FaderCommand(controller, midiSend, sysexSend),
                 new ButtonsModeCommand(controller, midiSend, sysexSend),
                 new SingleMuteCommand(controller, midiSend, sysexSend),
