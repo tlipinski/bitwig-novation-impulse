@@ -6,4 +6,4 @@ test:
   override:
     - mvn clean package
   post:
-    - cp target/NovationImpulse4961.bwextension $CIRCLE_ARTIFACTS
+    - cp target/NovationImpulse.bwextension $CIRCLE_ARTIFACTS

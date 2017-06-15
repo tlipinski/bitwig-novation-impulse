@@ -10,7 +10,7 @@ import java.util.Properties;
 public class Version {
     public static String get() {
         try {
-            String pomProperties = "/META-INF/maven/net.tlipinski/bitwig-novation-impulse-49-61/pom.properties";
+            String pomProperties = "/META-INF/maven/net.tlipinski/bitwig-novation-impulse/pom.properties";
             Properties props = new Properties();
             props.load(new InputStreamReader(Version.class.getResourceAsStream(pomProperties)));
             return props.getProperty("version");

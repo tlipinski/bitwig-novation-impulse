@@ -8,36 +8,33 @@ import net.tlipinski.bitwig.controller.SysexSend;
 
 import java.util.stream.Stream;
 
-public class FaderCommand implements MidiCommand {
+public class FaderCursorCommand implements MidiCommand {
 
-    public FaderCommand(Controller controller, MidiSend midiSend, SysexSend sysexSend) {
+    public FaderCursorCommand(Controller controller, MidiSend midiSend, SysexSend sysexSend) {
         this.controller = controller;
         this.midiSend = midiSend;
         this.sysexSend = sysexSend;
+
+        controller.getTracks().getCursorTrack().name().markInterested();
     }
 
     @Override
     public Stream<Boolean> triggersWhen(int statusByte, int data1, int data2) {
         return Stream.of(
-                controller.getModel().isImpulse49or61(),
+                controller.getModel().isImpulse25(),
                 statusByte == 0xB0,
-                data1 >= 0,
-                data1 <= 8
+                data1 == 8
         );
     }
 
     @Override
     public void handle(int data1, int data2) {
-        Track t = this.controller.getTracks().get(data1);
-        if (t != null) {
-            t.getVolume().set(data2, 128);
-            this.sysexSend.displayText(t.name().get());
+        Track t = this.controller.getTracks().getCursorTrack();
+        t.getVolume().set(data2, 128);
+        this.sysexSend.displayText(t.name().get());
 
-            // this will display volume value
-            this.midiSend.send(0xB0, data1, data2);
-        } else {
-            this.sysexSend.displayText("<empty>");
-        }
+        // this will display volume value
+        this.midiSend.send(0xB0, data1, data2);
     }
 
     private Controller controller;

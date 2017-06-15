@@ -3,9 +3,9 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>net.tlipinski</groupId>
-  <artifactId>bitwig-novation-impulse-49-61</artifactId>
+  <artifactId>bitwig-novation-impulse</artifactId>
   <packaging>jar</packaging>
-  <name>Novation Impulse 49/61</name>
+  <name>Novation Impulse</name>
   <version>1.0-beta.3-SNAPSHOT</version>
 
   <repositories>
@@ -57,7 +57,7 @@
             </goals>
             <configuration>
               <sourceFile>${project.build.directory}/${project.build.finalName}.jar</sourceFile>
-              <destinationFile>${project.build.directory}/NovationImpulse4961.bwextension</destinationFile>
+              <destinationFile>${project.build.directory}/NovationImpulse.bwextension</destinationFile>
             </configuration>
           </execution>
         </executions>

@@ -1,6 +1,7 @@
 package net.tlipinski.bitwig.controller;
 
 import com.bitwig.extension.controller.api.*;
+import net.tlipinski.bitwig.controller.observers.ImpulseModel;
 
 public class Controller {
 
@@ -62,6 +63,14 @@ public class Controller {
         return encoderMixerPage;
     }
 
+    public void setModel(ImpulseModel model) {
+        this.model = model;
+    }
+
+    public ImpulseModel getModel() {
+        return model;
+    }
+
     private final ControllerHost host;
     private final Tracks tracks;
     private final SysexSend sysexSend;
@@ -70,5 +79,6 @@ public class Controller {
     private EncoderMode encoderMode = EncoderMode.PLUGIN;
     private boolean shiftPressed = false;
     private EncoderMixerModePage encoderMixerPage = new EncoderMixerModePage();
+    private ImpulseModel model;
 
 }
