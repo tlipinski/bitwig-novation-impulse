@@ -29,14 +29,14 @@ public class Template {
     private String  encoder7   = "093b7f00100801";
     private String  encoder8   = "093c7f00100801";
 
-    private String  drumPad1   = "08437f00100801";
-    private String  drumPad2   = "08457f00100801";
-    private String  drumPad3   = "08477f00100801";
-    private String  drumPad4   = "08487f00100801";
-    private String  drumPad5   = "083c7f00100801";
-    private String  drumPad6   = "083e7f00100801";
-    private String  drumPad7   = "08407f00100801";
-    private String  drumPad8   = "08417f00100801";
+    private String  drumPad1   = "08287f00100801";
+    private String  drumPad2   = "08297f00100801";
+    private String  drumPad3   = "082a7f00100801";
+    private String  drumPad4   = "082b7f00100801";
+    private String  drumPad5   = "08247f00100801";
+    private String  drumPad6   = "08257f00100801";
+    private String  drumPad7   = "08267f00100801";
+    private String  drumPad8   = "08277f00100801";
 
     private String  fader1     = "092a7f00100801";
     private String  fader2     = "092b7f00100801";
