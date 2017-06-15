@@ -33,12 +33,10 @@ public class TrackPreviousCommand implements MidiCommand {
     @Override
     public void handle(int data1, int data2) {
         CursorTrack cursorTrack = controller.getTracks().getCursorTrack();
-        if (cursorTrack.hasPrevious().get()) {
-            int position = cursorTrack.position().get();
-            Track t = controller.getTracks().get(position - 1);
-            cursorTrack.selectChannel(t);
-            sysexSend.displayText(t.name().get());
-        }
+        cursorTrack.selectPrevious();
+        controller.getHost().scheduleTask(() -> {
+            sysexSend.displayText(cursorTrack.name().get());
+        }, 200);
     }
 
     private final Controller controller;

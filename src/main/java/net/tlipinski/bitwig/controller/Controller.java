@@ -79,6 +79,6 @@ public class Controller {
     private EncoderMode encoderMode = EncoderMode.PLUGIN;
     private boolean shiftPressed = false;
     private EncoderMixerModePage encoderMixerPage = new EncoderMixerModePage();
-    private ImpulseModel model;
+    private ImpulseModel model = ImpulseModel.IMPULSE_25;
 
 }
