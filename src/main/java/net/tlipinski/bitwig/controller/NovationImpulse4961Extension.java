@@ -35,6 +35,7 @@ public class NovationImpulse4961Extension extends ControllerExtension {
                 new SceneUpCommand(controller),
                 new SceneDownCommand(controller),
                 new SceneLaunchCommand(controller),
+                new FaderCursorCommand(controller, midiSend, sysexSend),
                 new FaderCommand(controller, midiSend, sysexSend),
                 new ButtonsModeCommand(controller, midiSend, sysexSend),
                 new SingleMuteCommand(controller, midiSend, sysexSend),
