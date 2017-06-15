@@ -1,4 +1,4 @@
-package net.tlipinski.bitwig.controller.commands;
+package net.tlipinski.bitwig.controller.commands.clips;
 
 import com.bitwig.extension.controller.api.Application;
 import com.bitwig.extension.controller.api.SceneBank;

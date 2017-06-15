@@ -1,4 +1,4 @@
-package net.tlipinski.bitwig.controller.commands;
+package net.tlipinski.bitwig.controller.commands.encoders;
 
 import net.tlipinski.bitwig.controller.Controller;
 import net.tlipinski.bitwig.controller.EncoderMode;
@@ -7,9 +7,9 @@ import net.tlipinski.bitwig.controller.SysexSend;
 
 import java.util.stream.Stream;
 
-public class EncoderMixerPageDownCommand implements MidiCommand {
+public class EncoderMixerPageUpCommand implements MidiCommand {
 
-    public EncoderMixerPageDownCommand(Controller controller, SysexSend sysexSend) {
+    public EncoderMixerPageUpCommand(Controller controller, SysexSend sysexSend) {
         this.controller = controller;
         this.sysexSend = sysexSend;
     }
@@ -19,13 +19,13 @@ public class EncoderMixerPageDownCommand implements MidiCommand {
         return Stream.of(
                 controller.getEncoderMode() == EncoderMode.MIXER,
                 statusByte == 0xB1,
-                data1 == 12
+                data1 == 11
         );
     }
 
     @Override
     public void handle(int data1, int data2) {
-        controller.getEncoderMixerPage().selectNextPage(false);
+        controller.getEncoderMixerPage().selectPreviousPage(false);
         sysexSend.displayText(controller.getEncoderMixerPage().name());
     }
 

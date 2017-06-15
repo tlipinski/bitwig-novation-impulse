@@ -1,4 +1,4 @@
-package net.tlipinski.bitwig.controller.commands;
+package net.tlipinski.bitwig.controller.commands.mixer;
 
 import com.bitwig.extension.controller.api.Track;
 import net.tlipinski.bitwig.controller.Controller;

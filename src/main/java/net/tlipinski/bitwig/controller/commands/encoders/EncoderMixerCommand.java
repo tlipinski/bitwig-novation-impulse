@@ -1,4 +1,4 @@
-package net.tlipinski.bitwig.controller.commands;
+package net.tlipinski.bitwig.controller.commands.encoders;
 
 import com.bitwig.extension.controller.api.Parameter;
 import com.bitwig.extension.controller.api.Track;

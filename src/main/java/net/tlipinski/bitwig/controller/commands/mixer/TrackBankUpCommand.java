@@ -1,4 +1,4 @@
-package net.tlipinski.bitwig.controller.commands;
+package net.tlipinski.bitwig.controller.commands.mixer;
 
 import net.tlipinski.bitwig.controller.Controller;
 import net.tlipinski.bitwig.controller.MidiCommand;

@@ -1,13 +1,13 @@
-package net.tlipinski.bitwig.controller.commands;
+package net.tlipinski.bitwig.controller.commands.mixer;
 
 import com.bitwig.extension.controller.api.Track;
 import net.tlipinski.bitwig.controller.*;
 
 import java.util.stream.Stream;
 
-public class SingleMuteCommand implements MidiCommand {
+public class SingleSoloCommand implements MidiCommand {
 
-    public SingleMuteCommand(Controller controller, MidiSend midiSend, SysexSend sysexSend) {
+    public SingleSoloCommand(Controller controller, MidiSend midiSend, SysexSend sysexSend) {
         this.controller = controller;
         this.midiSend = midiSend;
         this.sysexSend = sysexSend;
@@ -16,7 +16,7 @@ public class SingleMuteCommand implements MidiCommand {
     @Override
     public Stream<Boolean> triggersWhen(int statusByte, int data1, int data2) {
         return Stream.of(
-                controller.getButtonsMode() == ButtonsMode.MUTE,
+                controller.getButtonsMode() == ButtonsMode.SOLO,
                 controller.isShiftPressed(),
                 statusByte == 0xB0,
                 data1 >= 9,
@@ -30,10 +30,10 @@ public class SingleMuteCommand implements MidiCommand {
         if (data2 == 1) {
             Track t = controller.getTracks().get(buttonIndex);
             if (t != null) {
-                allLightsOn();
+                allLightsOff();
 
-                t.getMute().set(true);
-                midiSend.light(buttonIndex, false);
+                t.getSolo().set(true);
+                midiSend.light(buttonIndex, true);
                 sysexSend.displayText(t.name().get());
             } else {
                 sysexSend.displayText("<empty>");
@@ -41,9 +41,9 @@ public class SingleMuteCommand implements MidiCommand {
         }
     }
 
-    private void allLightsOn() {
+    private void allLightsOff() {
         for (Track track : controller.getTracks().getAll()) {
-            track.getMute().set(false);
+            track.getSolo().set(false);
         }
     }
 

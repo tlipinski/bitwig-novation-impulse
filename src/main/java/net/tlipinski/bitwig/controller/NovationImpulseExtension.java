@@ -4,6 +4,12 @@ import com.bitwig.extension.controller.ControllerExtension;
 import com.bitwig.extension.controller.api.ControllerHost;
 import com.bitwig.extension.controller.api.NoteInput;
 import net.tlipinski.bitwig.controller.commands.*;
+import net.tlipinski.bitwig.controller.commands.clips.SceneDownCommand;
+import net.tlipinski.bitwig.controller.commands.clips.SceneLaunchCommand;
+import net.tlipinski.bitwig.controller.commands.clips.SceneUpCommand;
+import net.tlipinski.bitwig.controller.commands.encoders.*;
+import net.tlipinski.bitwig.controller.commands.mixer.*;
+import net.tlipinski.bitwig.controller.commands.transport.*;
 import net.tlipinski.bitwig.controller.observers.*;
 
 import java.util.Arrays;

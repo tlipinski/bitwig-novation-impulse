@@ -1,4 +1,4 @@
-package net.tlipinski.bitwig.controller.commands;
+package net.tlipinski.bitwig.controller.commands.transport;
 
 import com.bitwig.extension.controller.api.Transport;
 import net.tlipinski.bitwig.controller.MidiCommand;
