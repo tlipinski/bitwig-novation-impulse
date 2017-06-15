@@ -1,9 +1,9 @@
 package net.tlipinski.bitwig.controller.commands;
 
-import com.bitwig.extension.controller.api.Application;
-import com.bitwig.extension.controller.api.SceneBank;
+import com.bitwig.extension.controller.api.*;
 import net.tlipinski.bitwig.controller.Controller;
 import net.tlipinski.bitwig.controller.MidiCommand;
+import net.tlipinski.bitwig.controller.observers.callbacks.RefreshClipLauncherCallback;
 
 import java.util.stream.Stream;
 
@@ -35,6 +35,8 @@ public class SceneUpCommand implements MidiCommand {
             // scene bank is created with .createSceneBank(1) so index 0
             // corresponds to first scene in current single element SceneBank page
             controller.getTracks().getSceneBank().getScene(0).selectInEditor();
+
+            new RefreshClipLauncherCallback(controller).refresh();
         }
     }
 

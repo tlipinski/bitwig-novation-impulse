@@ -5,6 +5,7 @@ import com.bitwig.extension.controller.api.ControllerHost;
 import com.bitwig.extension.controller.api.NoteInput;
 import net.tlipinski.bitwig.controller.commands.*;
 import net.tlipinski.bitwig.controller.observers.*;
+import net.tlipinski.bitwig.controller.observers.callbacks.RefreshClipLauncherCallback;
 
 import java.util.Arrays;
 import java.util.List;
@@ -29,10 +30,11 @@ public class NovationImpulseExtension extends ControllerExtension {
 
         Tracks tracks = new Tracks(host);
 
-        controller = new Controller(host, tracks, sysexSend, prefs);
+        controller = new Controller(host, tracks, midiSend, sysexSend, prefs);
+        new ClipLauncher(controller);
 
         List<MidiCommand> midiCommands = Arrays.asList(
-                new ClipLauncherCommand(controller, midiSend),
+                new ClipLauncherCommand(controller),
                 new SceneUpCommand(controller),
                 new SceneDownCommand(controller),
                 new SceneLaunchCommand(controller),
@@ -71,6 +73,7 @@ public class NovationImpulseExtension extends ControllerExtension {
         new ChannelCountObserver(controller, midiSend);
         new EncoderBankIndexObserver(controller, sysexSend);
         new TrackBankIndexObserver(controller, sysexSend);
+        new RefreshClipLauncherCallback(controller);
 
         host.getMidiInPort(0).setMidiCallback(new MidiCallback(host, prefs, midiCommands));
         host.getMidiInPort(1).setMidiCallback(new MidiCallback(host, prefs, midiCommands));

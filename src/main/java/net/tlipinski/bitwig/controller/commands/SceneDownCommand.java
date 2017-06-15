@@ -3,6 +3,7 @@ package net.tlipinski.bitwig.controller.commands;
 import com.bitwig.extension.controller.api.*;
 import net.tlipinski.bitwig.controller.Controller;
 import net.tlipinski.bitwig.controller.MidiCommand;
+import net.tlipinski.bitwig.controller.observers.callbacks.RefreshClipLauncherCallback;
 
 import java.util.stream.Stream;
 
@@ -34,6 +35,8 @@ public class SceneDownCommand implements MidiCommand {
 
             // read comment in SceneUpCommand
             controller.getTracks().getSceneBank().getScene(0).selectInEditor();
+
+            new RefreshClipLauncherCallback(controller).refresh();
         }
     }
 

@@ -5,9 +5,10 @@ import net.tlipinski.bitwig.controller.observers.ImpulseModel;
 
 public class Controller {
 
-    public Controller(ControllerHost host, Tracks tracks, SysexSend sysexSend, Preferences preferences) {
+    public Controller(ControllerHost host, Tracks tracks, MidiSend midiSend, SysexSend sysexSend, Preferences preferences) {
         this.host = host;
         this.tracks = tracks;
+        this.midiSend = midiSend;
         this.sysexSend = sysexSend;
         this.preferences = preferences;
     }
@@ -71,8 +72,13 @@ public class Controller {
         return model;
     }
 
+    public MidiSend getMidiSend() {
+        return midiSend;
+    }
+
     private final ControllerHost host;
     private final Tracks tracks;
+    private final MidiSend midiSend;
     private final SysexSend sysexSend;
     private final Preferences preferences;
     private ButtonsMode buttonsMode = ButtonsMode.MUTE;
