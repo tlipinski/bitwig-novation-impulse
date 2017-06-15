@@ -7,18 +7,18 @@ import com.bitwig.extension.controller.api.ControllerHost;
 
 import java.util.UUID;
 
-public class NovationImpulse4961ExtensionDefinition extends ControllerExtensionDefinition
+public class NovationImpulseExtensionDefinition extends ControllerExtensionDefinition
 {
    private static final UUID DRIVER_ID = UUID.fromString("c502ace6-b694-4037-a924-4476f9062b0f");
    
-   public NovationImpulse4961ExtensionDefinition()
+   public NovationImpulseExtensionDefinition()
    {
    }
 
    @Override
    public String getName()
    {
-      return "Novation Impulse 49/61";
+      return "Novation Impulse";
    }
    
    @Override
@@ -47,7 +47,7 @@ public class NovationImpulse4961ExtensionDefinition extends ControllerExtensionD
    @Override
    public String getHardwareModel()
    {
-      return "Impulse 49/61";
+      return "Impulse 25/49/61";
    }
 
    @Override
@@ -89,8 +89,8 @@ public class NovationImpulse4961ExtensionDefinition extends ControllerExtensionD
    }
 
    @Override
-   public NovationImpulse4961Extension createInstance(final ControllerHost host)
+   public NovationImpulseExtension createInstance(final ControllerHost host)
    {
-      return new NovationImpulse4961Extension(this, host);
+      return new NovationImpulseExtension(this, host);
    }
 }

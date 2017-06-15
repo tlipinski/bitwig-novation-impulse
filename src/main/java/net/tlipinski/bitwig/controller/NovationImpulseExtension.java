@@ -9,11 +9,11 @@ import net.tlipinski.bitwig.controller.observers.*;
 import java.util.Arrays;
 import java.util.List;
 
-public class NovationImpulse4961Extension extends ControllerExtension {
+public class NovationImpulseExtension extends ControllerExtension {
 
     private Controller controller;
 
-    protected NovationImpulse4961Extension(final NovationImpulse4961ExtensionDefinition definition, final ControllerHost host) {
+    protected NovationImpulseExtension(final NovationImpulseExtensionDefinition definition, final ControllerHost host) {
         super(definition, host);
     }
 
