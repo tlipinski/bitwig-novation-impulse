@@ -19,6 +19,7 @@ public class FaderCommand implements MidiCommand {
     @Override
     public Stream<Boolean> triggersWhen(int statusByte, int data1, int data2) {
         return Stream.of(
+                controller.getModel().isImpulse49or61(),
                 statusByte == 0xB0,
                 data1 >= 0,
                 data1 <= 8

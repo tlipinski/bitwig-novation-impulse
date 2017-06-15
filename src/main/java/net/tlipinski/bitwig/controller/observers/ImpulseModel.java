@@ -7,6 +7,14 @@ public enum ImpulseModel {
         this.keys = keys;
     }
 
+    public boolean isImpulse25() {
+        return this == IMPULSE_25;
+    }
+
+    public boolean isImpulse49or61() {
+        return this == IMPULSE_49 || this == IMPULSE_61;
+    }
+
     public static ImpulseModel get(int keys) {
         return ImpulseModel.valueOf("IMPULSE_" + keys);
     }

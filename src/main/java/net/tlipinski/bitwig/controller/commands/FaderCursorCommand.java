@@ -5,7 +5,6 @@ import net.tlipinski.bitwig.controller.Controller;
 import net.tlipinski.bitwig.controller.MidiCommand;
 import net.tlipinski.bitwig.controller.MidiSend;
 import net.tlipinski.bitwig.controller.SysexSend;
-import net.tlipinski.bitwig.controller.observers.ImpulseModel;
 
 import java.util.stream.Stream;
 
@@ -22,7 +21,7 @@ public class FaderCursorCommand implements MidiCommand {
     @Override
     public Stream<Boolean> triggersWhen(int statusByte, int data1, int data2) {
         return Stream.of(
-                controller.getModel() == ImpulseModel.IMPULSE_25,
+                controller.getModel().isImpulse25(),
                 statusByte == 0xB0,
                 data1 == 8
         );
