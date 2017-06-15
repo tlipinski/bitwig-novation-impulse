@@ -10,6 +10,9 @@ import java.util.Arrays;
 import java.util.List;
 
 public class NovationImpulse4961Extension extends ControllerExtension {
+
+    private Controller controller;
+
     protected NovationImpulse4961Extension(final NovationImpulse4961ExtensionDefinition definition, final ControllerHost host) {
         super(definition, host);
     }
@@ -26,7 +29,7 @@ public class NovationImpulse4961Extension extends ControllerExtension {
 
         Tracks tracks = new Tracks(host);
 
-        Controller controller = new Controller(host, tracks, sysexSend, prefs);
+        controller = new Controller(host, tracks, sysexSend, prefs);
 
         List<MidiCommand> midiCommands = Arrays.asList(
                 new SceneUpCommand(controller),
@@ -70,20 +73,18 @@ public class NovationImpulse4961Extension extends ControllerExtension {
         host.getMidiInPort(0).setMidiCallback(new MidiCallback(host, prefs, midiCommands));
         host.getMidiInPort(1).setMidiCallback(new MidiCallback(host, prefs, midiCommands));
 
-        host.getMidiInPort(0).setSysexCallback(new SysexCallback(host, prefs));
-        host.getMidiInPort(1).setSysexCallback(new SysexCallback(host, prefs));
+        host.getMidiInPort(0).setSysexCallback(new SysexCallback(host, controller, prefs));
+        host.getMidiInPort(1).setSysexCallback(new SysexCallback(host, controller, prefs));
 
         NoteInput noteInputs0 = createNoteInputs(host, 0);
         NoteInput noteInputs1 = createNoteInputs(host, 1);
-
-        host.showPopupNotification("Novation Impulse 49 Initialized");
 
         sysexSend.initController();
     }
 
     @Override
     public void exit() {
-        getHost().showPopupNotification("Novation Impulse 49 Exited");
+        getHost().showPopupNotification("Novation Impulse " + controller.getModel().keys + " Exited");
     }
 
     @Override
