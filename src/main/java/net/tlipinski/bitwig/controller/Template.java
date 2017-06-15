@@ -38,15 +38,15 @@ public class Template {
     private String  drumPad7   = "08407f00100801";
     private String  drumPad8   = "08417f00100801";
 
-    private String  fader1     = "09297f00100801";
-    private String  fader2     = "092a7f00100801";
-    private String  fader3     = "092b7f00100801";
-    private String  fader4     = "092c7f00100801";
-    private String  fader5     = "092d7f00100801";
-    private String  fader6     = "092e7f00100801";
-    private String  fader7     = "092f7f00100801";
-    private String  fader8     = "09307f00100801";
-    private String  faderM     = "09317f00100801";
+    private String  fader1     = "092a7f00100801";
+    private String  fader2     = "092b7f00100801";
+    private String  fader3     = "092c7f00100801";
+    private String  fader4     = "092d7f00100801";
+    private String  fader5     = "092e7f00100801";
+    private String  fader6     = "092f7f00100801";
+    private String  fader7     = "09307f00100801";
+    private String  fader8     = "09317f00100801";
+    private String  faderM     = "09327f00100801";
 
     private String  button1    = "11337f00100801";
     private String  button2    = "11347f00100801";
