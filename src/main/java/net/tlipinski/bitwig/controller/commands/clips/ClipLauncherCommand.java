@@ -1,4 +1,4 @@
-package net.tlipinski.bitwig.controller.commands;
+package net.tlipinski.bitwig.controller.commands.clips;
 
 import com.bitwig.extension.controller.api.ClipLauncherSlot;
 import com.bitwig.extension.controller.api.ClipLauncherSlotBank;

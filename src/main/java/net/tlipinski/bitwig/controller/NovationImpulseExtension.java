@@ -4,6 +4,7 @@ import com.bitwig.extension.controller.ControllerExtension;
 import com.bitwig.extension.controller.api.ControllerHost;
 import com.bitwig.extension.controller.api.NoteInput;
 import net.tlipinski.bitwig.controller.commands.*;
+import net.tlipinski.bitwig.controller.commands.clips.ClipLauncherCommand;
 import net.tlipinski.bitwig.controller.commands.clips.SceneDownCommand;
 import net.tlipinski.bitwig.controller.commands.clips.SceneLaunchCommand;
 import net.tlipinski.bitwig.controller.commands.clips.SceneUpCommand;
