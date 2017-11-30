@@ -4,10 +4,7 @@ import com.bitwig.extension.controller.ControllerExtension;
 import com.bitwig.extension.controller.api.ControllerHost;
 import com.bitwig.extension.controller.api.NoteInput;
 import net.tlipinski.bitwig.controller.commands.*;
-import net.tlipinski.bitwig.controller.commands.clips.ClipLauncherCommand;
-import net.tlipinski.bitwig.controller.commands.clips.SceneDownCommand;
-import net.tlipinski.bitwig.controller.commands.clips.SceneLaunchCommand;
-import net.tlipinski.bitwig.controller.commands.clips.SceneUpCommand;
+import net.tlipinski.bitwig.controller.commands.clips.*;
 import net.tlipinski.bitwig.controller.commands.encoders.*;
 import net.tlipinski.bitwig.controller.commands.mixer.*;
 import net.tlipinski.bitwig.controller.commands.transport.*;
@@ -41,6 +38,7 @@ public class NovationImpulseExtension extends ControllerExtension {
         new ClipLauncher(controller);
 
         List<MidiCommand> midiCommands = Arrays.asList(
+                new ClipStopCommand(controller),
                 new ClipLauncherCommand(controller),
                 new SceneUpCommand(controller),
                 new SceneDownCommand(controller),
