@@ -16,6 +16,10 @@ public class MidiSend {
         }
     }
 
+    public void clipLight(int index, ClipLight light) {
+        host.getMidiOutPort(0).sendMidi(0xB0, 60 + index, light.light);
+    }
+
     public void send(int status, int data1, int data2) {
         host.getMidiOutPort(0).sendMidi(status, data1, data2);
     }
