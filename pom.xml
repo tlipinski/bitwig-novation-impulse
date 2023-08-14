@@ -6,7 +6,7 @@
   <artifactId>bitwig-novation-impulse</artifactId>
   <packaging>jar</packaging>
   <name>Novation Impulse</name>
-  <version>1.0-beta.5-SNAPSHOT</version>
+  <version>1.0</version>
   <scm>
     <connection>scm:git:git@github.com:tlipinski/bitwig-novation-impulse.git</connection>
   </scm>
