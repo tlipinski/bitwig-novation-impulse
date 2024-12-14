@@ -120,8 +120,8 @@ public class NovationImpulseExtension extends ControllerExtension {
             padNote,
             padVelocity,
             modWheel,
-            allCC,
-            sustainPedal);
+            sustainPedal,
+            allCC);
     }
 
 }
