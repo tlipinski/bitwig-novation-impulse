@@ -108,7 +108,7 @@ public class NovationImpulseExtension extends ControllerExtension {
         String aftertouch = "D0????";
         String pitchWheel = "E0????";
         String modWheel = "B201??";
-        String expressionPedal = "B20A??";
+        String expressionPedal = "B20B??";
         String sustainPedal = "B240??";
         String padNote = "99????";
         String padVelocity = "D9????";
