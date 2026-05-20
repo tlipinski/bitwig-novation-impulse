@@ -6,7 +6,7 @@
   <artifactId>bitwig-novation-impulse</artifactId>
   <packaging>jar</packaging>
   <name>Novation Impulse</name>
-  <version>1.0</version>
+  <version>1.1</version>
   <scm>
     <connection>scm:git:git@github.com:tlipinski/bitwig-novation-impulse.git</connection>
   </scm>
@@ -23,7 +23,7 @@
     <dependency>
       <groupId>com.bitwig</groupId>
       <artifactId>extension-api</artifactId>
-      <version>17</version>
+      <version>18</version>
     </dependency>
   </dependencies>
 
